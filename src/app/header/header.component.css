@@ -1,0 +1,47 @@
+.mat-toolbar{
+  color: rgba(23, 48, 95, 0.788);
+  background-color: rgb(231, 234, 240);
+  border-bottom-style: groove;
+  border-bottom-right-radius: 40%;
+  border-bottom-left-radius: 20%;
+  height: 12%;
+
+
+
+
+}
+
+.btn{
+  margin-top: 3% ;
+  font-size: 90%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+
+}
+
+.dropBtn{
+
+  color: rgb(7, 39, 99);
+  font-size: 100%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#NameWeb{
+  background-image: url('../media/Capture.PNG');
+  background-size: 110px;
+  background-repeat: no-repeat;
+  border-radius: 8%;
+opacity: 0.8;
+  border-style: solid;
+
+  width: 110px;
+  height: 75px;
+  margin-left: 10% ;
+  margin-top: 0% ;
+  font-size: 150%;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#navBtns{
+  margin-left: 7%;
+}

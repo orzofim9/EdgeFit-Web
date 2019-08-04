@@ -1,0 +1,15 @@
+:host{
+  display: block;
+  margin-top: 3%;
+
+}
+
+.info-text{
+  text-align: center;
+  background-color: rgba(238, 240, 245, 0.733);
+}
+
+.mat-expansion-panel{
+  background-color: rgba(238, 240, 245, 0.733);
+
+}

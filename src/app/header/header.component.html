@@ -1,0 +1,26 @@
+
+<mat-toolbar >
+  <span id='NameWeb'></span>
+
+
+
+<div id=navBtns>
+  <button class="btn" mat-button  [matMenuTriggerFor]="myedge">My Edge</button>
+  <mat-menu #myedge="matMenu"  >
+      <button mat-menu-item class="dropBtn">Home</button>
+      <button mat-menu-item class="dropBtn">Schdule</button>
+      <button mat-menu-item class="dropBtn">Menu</button>
+  </mat-menu>
+
+  <button class="btn" mat-button  [matMenuTriggerFor]="items">Items</button>
+  <mat-menu #items="matMenu">
+    <button mat-menu-item class="dropBtn" >Food Additives</button>
+    <button mat-menu-item class="dropBtn" >Equipment</button>
+    <button mat-menu-item class="dropBtn" >Sport Clothes</button>
+  </mat-menu>
+
+  <button class="btn" mat-button>Contact</button>
+  <button class="btn" mat-button>About</button>
+</div>
+</mat-toolbar>
+
