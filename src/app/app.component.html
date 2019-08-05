@@ -2,8 +2,7 @@
 <body>
     <app-header></app-header>
 <main>
-  <app-post-create (post_created)="onPostAdded($event)"></app-post-create>
-  <app-post-list [posts]="stored_posts"></app-post-list>
+  <router-outlet></router-outlet>
 </main>
 </body>
 

@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import {PostCreateComponent} from './posts/post-create/post-create.component';
 import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { AboutComponent } from './pages/about/about.component';
 
 
 @NgModule({
@@ -17,10 +19,13 @@ import { PostListComponent } from './posts/post-list/post-list.component';
     AppComponent,
     PostCreateComponent,
     HeaderComponent,
-    PostListComponent
+    PostListComponent,
+    ContactComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
