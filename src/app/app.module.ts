@@ -4,6 +4,7 @@ import { FormsModule, } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations' ;
 import { MatInputModule, MatToolbarModule, MatButtonModule,MatExpansionModule,MatMenuModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,8 @@ import { PostListComponent } from './posts/post-list/post-list.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { AboutComponent } from './pages/about/about.component';
 import { AgmCoreModule } from '@agm/core';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -21,11 +24,12 @@ import { AgmCoreModule } from '@agm/core';
     HeaderComponent,
     PostListComponent,
     ContactComponent,
-    AboutComponent
+    AboutComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -35,6 +39,7 @@ import { AgmCoreModule } from '@agm/core';
     MatToolbarModule,
     MatExpansionModule,
     MatMenuModule,
+    HttpClientModule,
     //Google maps api key
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB_QKXBX8kCEWW7k5toiRA4PWTElJNw-48'

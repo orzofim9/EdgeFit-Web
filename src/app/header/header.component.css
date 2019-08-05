@@ -5,10 +5,6 @@
   border-bottom-right-radius: 40%;
   border-bottom-left-radius: 20%;
   height: 12%;
-
-
-
-
 }
 
 .btn{
@@ -44,4 +40,8 @@ opacity: 0.8;
 
 #navBtns{
   margin-left: 7%;
+}
+
+.userSection{
+  right: 10%;
 }

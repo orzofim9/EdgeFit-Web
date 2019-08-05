@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output} from '@angular/core';
-import {NgForm} from "@angular/forms";
+import { NgForm } from "@angular/forms";
 
 import { Post } from '../post-list/post.model';
 
@@ -25,4 +25,3 @@ export class PostCreateComponent {
   }
 }
 
-//change
