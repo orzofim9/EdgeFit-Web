@@ -2,3 +2,9 @@
     margin: auto;
     padding: 1%;
 }
+
+agm-map{
+    align-content: center;
+    height: 300px;
+    width: 300px;
+}

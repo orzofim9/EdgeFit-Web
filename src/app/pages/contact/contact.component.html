@@ -2,4 +2,10 @@
     <h3>Hi, That's how you can contact me:</h3>
     <p>Phone: 0526-655823</p>
     <p>Email: omereldadi@gmail.com</p>
+
+    <div class="content">
+        <agm-map [zoom]="15" [latitude]="lat" [longitude]="lng">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+    </div>
 </div>
