@@ -4,7 +4,7 @@ import { FormsModule, } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations' ;
 import { MatInputModule, MatToolbarModule, MatButtonModule,MatExpansionModule,MatMenuModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { AgmCoreModule } from '@agm/core';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { AuthInterceptor } from './auth/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { SignupComponent } from './auth/signup/signup.component';
       apiKey: 'AIzaSyB_QKXBX8kCEWW7k5toiRA4PWTElJNw-48'
     })
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

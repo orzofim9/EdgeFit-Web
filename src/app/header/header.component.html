@@ -1,30 +1,36 @@
 
 <mat-toolbar >
-  <span id='NameWeb'></span>
+  <span routerLink="/" id='NameWeb'></span>
+  <div id=navBtns>
+    <div style="width:70%">
+      <button class="btn" mat-button  [matMenuTriggerFor]="myedge">My Edge</button>
+      <mat-menu #myedge="matMenu"  >
+          <button mat-menu-item class="dropBtn">Home</button>
+          <button mat-menu-item class="dropBtn">Schdule</button>
+          <button mat-menu-item class="dropBtn">Menu</button>
+      </mat-menu>
 
+      <button class="btn" mat-button  [matMenuTriggerFor]="items">Items</button>
+      <mat-menu #items="matMenu">
+        <button mat-menu-item class="dropBtn" >Food Additives</button>
+        <button mat-menu-item class="dropBtn" >Equipment</button>
+        <button mat-menu-item class="dropBtn" >Sport Clothes</button>
+      </mat-menu>
 
+      <button routerLink="/contact" class="btn" mat-button>Contact</button>
+      <button routerLink="/about" class="btn" mat-button>About</button>
+    </div>  
+    <div class="userSection">
+      <div *ngIf="!userIsAuthenticated">
+        <button routerLink="/login" class="btn" mat-button>Login</button>
+        <button routerLink="/signup" class="btn" mat-button>Sign Up</button>
+      </div>
+      <div>
+        <button *ngIf="userIsAuthenticated" (click)="onLogout()" class="btn" mat-button>Log Out</button>
+      </div>
+    </div>  
 
-<div id=navBtns>
-  <button class="btn" mat-button  [matMenuTriggerFor]="myedge">My Edge</button>
-  <mat-menu #myedge="matMenu"  >
-      <button mat-menu-item class="dropBtn">Home</button>
-      <button mat-menu-item class="dropBtn">Schdule</button>
-      <button mat-menu-item class="dropBtn">Menu</button>
-  </mat-menu>
+  </div>
 
-  <button class="btn" mat-button  [matMenuTriggerFor]="items">Items</button>
-  <mat-menu #items="matMenu">
-    <button mat-menu-item class="dropBtn" >Food Additives</button>
-    <button mat-menu-item class="dropBtn" >Equipment</button>
-    <button mat-menu-item class="dropBtn" >Sport Clothes</button>
-  </mat-menu>
-
-  <button routerLink="/contact" class="btn" mat-button>Contact</button>
-  <button routerLink="/about" class="btn" mat-button>About</button>
-    <button routerLink="/login" class="btn" mat-button>Login</button>
-    <button routerLink="/signup" class="btn" mat-button>Sign Up</button>
-
-
-</div>
-</mat-toolbar>
+  </mat-toolbar>
 

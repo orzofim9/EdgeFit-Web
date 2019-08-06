@@ -5,10 +5,10 @@
                 <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
             </mat-form-field>
             <mat-form-field>
-                <input matInput type="paswword" name="password" ngModel placeholder="Password" #passwordInput="ngModel">
+                <input matInput type="password" name="password" ngModel placeholder="Password" #passwordInput="ngModel">
                 <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
             </mat-form-field>
-            <button color="primary" mat-raised-button type="submit">Sign Up</button>
+            <button color="primary" mat-raised-button type="submit" *ngIf="!isLoading">Sign Up</button>
         </form>
     </mat-card>
           
