@@ -11,7 +11,7 @@ import * as io from 'socket.io-client';
   styleUrls: ['./users-list.component.css']
 })
 export class UsersListComponent implements OnInit {
-  socket;
+  socket:SocketIOClient.Socket;
   usersList;
   constructor(private http: HttpClient, private router: Router){
     this.socket = io.connect('http://localhost:5000');
@@ -20,25 +20,12 @@ export class UsersListComponent implements OnInit {
   ngOnInit() {
     this.getUsersList();
     this.socket.on("getUsers",userMap => {
-      //this.usersList = JSON.parse(userMap);
-      console.log(this.usersList);
       this.getUsersList();
     })
   }
 
   getUsersList(){
     this.http.get("http://localhost:5000/api/user/usersList").subscribe(response=>{
-    /* const users = Object.values(response);
-     console.log(users);
-     for(var user in users){
-       console.log(user);
-       var properties = Object.values(user);
-       console.log(properties);
-       this.usersList.push(properties[1]);     
-      }
-      console.log(this.usersList);*/
-
-      console.log(response);
       this.usersList = response;
     });
   }
