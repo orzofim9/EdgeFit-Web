@@ -5,8 +5,10 @@ const mongoose = require('mongoose');
 // path to the user.js routes
 const userRoutes = require('./src/backend/routes/user');
 const app = express();
-const socket = require('socket.io');
-
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const userScheme = require('./src/backend/models/user');
+const http = require('http');
 mongoose.connect("mongodb+srv://Sagi:dmRSJFPfkxnioIXX@cluster0-56ueu.mongodb.net/edgefit?w=majority").then(()=>{
   console.log("Connected to db");
 })
@@ -18,9 +20,33 @@ app.use(express.static(path.join(__dirname, 'dist/firstApp')));
 
 app.use(bodyParser.json());
 
+io.on('connection',(socket) => {
+  console.log("new connection made");
+  let userMap = [];
+  var interval = setInterval(()=>{http.get('http://localhost:5000/api/user/usersList', response =>{
+      let data = "";
+      response.on('data', chunk=>{
+        data += chunk;
+      })
+      response.on('end',()=>{
+        console.log(data);
+        userMap = data;
+
+        
+      })
+    });
+  },500);
+  console.log(userMap);
+  socket.emit('getUsers',userMap);
+  /*socket.emit('hello',{
+    msg: 'Server to client'
+  });*/
+});
+
+
 const port = process.env.port || 5000 ;
 
-var server = app.listen(port,()=> console.log('Server started on port ' + port));
+server.listen(port,()=> console.log('Server started on port ' + port));
 
 app.use((req, res, next)=>{
   res.setHeader("Access-Control-Allow-Origin","*");
@@ -36,8 +62,4 @@ app.use((req, res, next)=>{
 
 app.use("/api/user",userRoutes);
 
-var io = socket(server);
-io.on('connection',function(socket){
-  console.log("connected");
-});
 

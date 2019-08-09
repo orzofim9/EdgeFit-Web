@@ -56,4 +56,16 @@ router.post("/login", (req, res, next)=>{
     })
 });
 
+router.get('/usersList', function(req, res) {
+    User.find({}, function(err, users) {
+      var userMap = [];
+  
+      users.forEach(function(user) {
+        userMap.push(user.email);
+      });
+  
+      res.status(200).json(userMap);  
+    });
+});
+
 module.exports = router;

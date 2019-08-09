@@ -17,6 +17,7 @@ import { AgmCoreModule } from '@agm/core';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { UsersListComponent } from './pages/users-list/users-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     ContactComponent,
     AboutComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    UsersListComponent
   ],
   imports: [
     BrowserModule,
