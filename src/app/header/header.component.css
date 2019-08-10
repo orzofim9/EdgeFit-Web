@@ -41,11 +41,14 @@ opacity: 0.8;
 #navBtns{
   margin-top: 2%;
   margin-left: 7%;
+  margin-right: 10%;
+  margin-bottom: 2%;
   float: left;
+  width: 40%;
 }
 
 .userSection{
-  margin-left: 100%;
-  margin-top: 1%;
-  margin-bottom: 15%;
+  padding:40%;
+  margin:0;
+  display: inline-block;
 }

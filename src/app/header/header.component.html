@@ -2,7 +2,7 @@
 <mat-toolbar >
   <span routerLink="/" id='NameWeb'></span>
   <div id=navBtns>
-    <div style="width:70%">
+    <div style="display:inline-block;">
       <button class="btn" mat-button  [matMenuTriggerFor]="myedge">My Edge</button>
       <mat-menu #myedge="matMenu"  >
           <button mat-menu-item class="dropBtn">Home</button>
@@ -22,7 +22,7 @@
       <button routerLink="/users" class="btn" mat-button>Users List</button>
 
     </div>  
-    <div class="userSection">
+    <span class="userSection">
       <div *ngIf="!userIsAuthenticated">
         <button routerLink="/login" class="btn" mat-button>Login</button>
         <button routerLink="/signup" class="btn" mat-button>Sign Up</button>
@@ -30,7 +30,7 @@
       <div>
         <button *ngIf="userIsAuthenticated" (click)="onLogout()" class="btn" mat-button>Log Out</button>
       </div>
-    </div>  
+    </span>  
 
   </div>
 
