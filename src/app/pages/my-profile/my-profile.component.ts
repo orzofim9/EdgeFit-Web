@@ -15,7 +15,7 @@ export class MyProfileComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router, public authService: AuthService) { }
 
   ngOnInit() {
-    this.email=localStorage.getItem('email');
+    this.email = localStorage.getItem('email');
     if(!this.email){
       console.log("can't load user details");
       return;
@@ -29,9 +29,14 @@ export class MyProfileComponent implements OnInit {
   onUpdate(form: NgForm){
     this.userDetails.firstName = form.value.firstName;
     this.userDetails.lastName = form.value.lastName;
+    this.userDetails.city = form.value.city;
+    this.userDetails.address = form.value.address;
+    this.userDetails.phone = form.value.phone;
+
     console.log(this.userDetails);
     this.http.post("http://localhost:5000/api/userDetails/updateDetails/" + this.email,this.userDetails).subscribe(response => {
       console.log(response);
+      alert('Details updated!');
     })
   }
 

@@ -2,3 +2,8 @@
     margin: auto;
     padding: 10px;
 }
+
+table{
+    width: 100%;
+    background: rgba(255,255,255,0);
+}

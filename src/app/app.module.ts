@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations' ;
-import { MatInputModule, MatToolbarModule, MatButtonModule,MatExpansionModule,MatMenuModule, MatSelectModule } from '@angular/material';
+import { MatInputModule, MatToolbarModule, MatButtonModule,MatExpansionModule,MatMenuModule, MatSelectModule, MatTableModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -45,6 +45,7 @@ import { MyProfileComponent } from './pages/my-profile/my-profile.component';
     MatExpansionModule,
     MatMenuModule,
     MatSelectModule,
+    MatTableModule,
     HttpClientModule,
     //Google maps api key
     AgmCoreModule.forRoot({

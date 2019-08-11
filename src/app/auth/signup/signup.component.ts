@@ -24,7 +24,10 @@ export class SignupComponent{
       email: form.value.email,
       firstName: form.value.firstName,
       lastName: form.value.lastName,
-      birthday: form.value.birthday
+      birthday: form.value.birthday,
+      city: form.value.city,
+      address: form.value.address,
+      phone: form.value.phone
     }
     console.log(this.userDetails);
     this.http.post("http://localhost:5000/api/userDetails/signup",this.userDetails).subscribe(response => {
