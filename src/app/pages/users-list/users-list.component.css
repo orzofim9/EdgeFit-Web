@@ -7,3 +7,16 @@ table{
     width: 100%;
     background: rgba(255,255,255,0);
 }
+
+.userListHeader{
+    width: 100%;
+    background: rgba(13, 3, 156, 0.65);
+    text-align: center;
+    color: white;
+    font: 18px arial, sans-serif;
+}
+
+.searchBox{
+    width: 95%;
+    background: rgba(255,255,255,0.6);
+}

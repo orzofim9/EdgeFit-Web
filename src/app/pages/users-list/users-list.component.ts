@@ -23,9 +23,12 @@ export class UsersListComponent implements OnInit {
     this.socket.on("getUsers",userMap => {
       this.getUsersList();
     })
-    
   }
 
+  /**
+   * get Users list from server
+   * parse response into array of jsons and set into this.usersList property
+   */
   getUsersList(){
     this.http.get("http://localhost:5000/api/userDetails/usersList").subscribe(response=>{
     var list = Object.values(Object.entries(Object.values(response)));

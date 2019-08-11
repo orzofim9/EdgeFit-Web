@@ -1,4 +1,22 @@
 <div class="userList">
+
+        <mat-card class="searchBox">
+                <form #searchForm="ngForm">
+                    <mat-form-field>
+                        <input matInput type="text" name="firstName" ngModel placeholder="First name" #fisrtNameInput="ngModel">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput type="text" name="lastName" ngModel placeholder="Last name" #lastNameInput="ngModel">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput type="text" name="city" ngModel placeholder="City" #cityInput="ngModel">
+                    </mat-form-field>
+                    <button color="primary" mat-raised-button type="submit">Search</button>
+                </form>
+        </mat-card>
+
+    <p class="userListHeader">Users List</p>
+
     <table mat-table [dataSource]="usersList">
             <ng-container matColumnDef="First Name">
                 <th mat-header-cell *matHeaderCellDef> First Name </th>
