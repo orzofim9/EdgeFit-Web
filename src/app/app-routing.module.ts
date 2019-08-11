@@ -6,6 +6,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { UsersListComponent } from './pages/users-list/users-list.component';
+import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 
 
@@ -16,7 +17,8 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'users', component: UsersListComponent },
-    { path: 'myprofile', component: MyProfileComponent }
+    { path: 'myprofile', component: MyProfileComponent },
+    { path: 'products', component: ProductsListComponent }
 ];
 
 @NgModule({

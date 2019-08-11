@@ -26,7 +26,7 @@ router.post("/signup", (req, res, next)=>{
 router.get('/getUserDetails/:email',function(req,res,next){
     UserDetails.find({email: req.params.email},function(err, user){
         res.status(200).json(user);
-        
+
     });
 });
 
@@ -38,15 +38,15 @@ router.get('/usersList', function(req, res) {
             userName = user.firstName + " " + user.lastName;
             userMap.push(userName);
         });
-      
-        res.status(200).json(userMap);  
+
+        res.status(200).json(userMap);
     });
 });
 
 router.post('/updateDetails/:email',function(req,res){
        UserDetails.updateOne({ email: req.params.email },{ firstName: req.body.firstName, lastName: req.body.lastName }, function(err,response){
            res.status(201).json({
-            msg: "user updated!",   
+            msg: "user updated!",
             response: response
            })
        });
@@ -62,4 +62,3 @@ router.get('/deleteUser/:email',(req,res)=>{
 });
 
 module.exports = router;
-

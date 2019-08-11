@@ -1,9 +1,9 @@
 const cheerio = require('cheerio');
 const request = require('request');
 const Product = require("../models/product");
-const express = require("express");
-const router = express.Router();
-const jwt = require('jsonwebtoken');
+const mongoose = require("mongoose");
+
+
 
 /*const conn = mongoose.createConnection("mongodb+srv://Sagi:dmRSJFPfkxnioIXX@cluster0-56ueu.mongodb.net/edgefit?w=majority",{ useNewUrlParser: true });
 conn.on('open', function () {
@@ -21,7 +21,7 @@ conn.on('open', function () {
         }
     });
 });
-conn.db.listCollections({name: 'products'})//move this lines to the file that calls this file
+mongoose.db.listCollections({name: 'products'})//move this lines to the file that calls this file
     .next(function(err, collinfo) {
         if (collinfo) {
           mongoose.connection.db.dropCollection('porducts', function(err, result) {});
@@ -32,7 +32,7 @@ conn.db.listCollections({name: 'products'})//move this lines to the file that ca
 
     });
 */
-
+console.log("hello")
 var product_number = 1;
 //sports shoes
 product_request_category('https://www.allsportstore.com/en/Football-Boots/c-63.aspx?AttributeValueIDs=1462','Sports shoes')
@@ -44,7 +44,8 @@ product_request_category('https://www.allsportstore.com/en/RunningFitness/c-269.
 product_request_category('https://www.allsportstore.com/en/Running-Accessories/c-139.aspx?AttributeValueIDs=2894', 'Equipment')
 // food additives
 product_request_category('https://www.allsportstore.com/en/Supliments-and-Energy-Drinks/c-351.aspx',  'Food additives')
-
+// balls
+product_request_category('https://www.allsportstore.com/en/Balls/c-447.aspx',  'Balls')
 function product_request_category(url,product_category){
   request(url, (error,response, html)=>{
     if(!error && response.statusCode == 200){
@@ -76,10 +77,10 @@ function product_request_category(url,product_category){
              });
             product.save().then(result => {
               console.log("product saved!")
-              res.status(201).json({
+/*              res.status(201).json({
                 message: 'Product created!',
                 result: result
-              });
+              });*/
             });
 
      // });
