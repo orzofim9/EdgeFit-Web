@@ -19,6 +19,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { UsersListComponent } from './pages/users-list/users-list.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
+import { ProductsListComponent } from './pages/products-list/products-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MyProfileComponent } from './pages/my-profile/my-profile.component';
     LoginComponent,
     SignupComponent,
     UsersListComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    ProductsListComponent
   ],
   imports: [
     BrowserModule,

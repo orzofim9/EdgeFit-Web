@@ -31,7 +31,7 @@ router.post("/signup", (req, res, next)=>{
 router.get('/getUserDetails/:email',function(req,res,next){
     UserDetails.find({email: req.params.email},function(err, user){
         res.status(200).json(user);
-        
+
     });
 });
 
@@ -75,4 +75,3 @@ router.get('/deleteUser/:email',(req,res)=>{
 });
 
 module.exports = router;
-

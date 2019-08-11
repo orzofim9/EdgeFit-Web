@@ -6,7 +6,8 @@ const mongoose = require('mongoose');
 // path to the user.js routes
 const userRoutes = require('./src/backend/routes/user');
 const userDetailsRoutes = require('./src/backend/routes/userDetails');
-
+const productRoutes = require('./src/backend/routes/product_routes');
+//const scrape = require('./src/backend/scraper/scrape');
 const app = express();
 const http = require('http');
 const server = http.Server(app);
@@ -32,7 +33,7 @@ io.on('connection',(socket) => {
   console.log("new connection made");
   let userMap = [];
   // emit to client each 0.5 second the users list from db
-  interval = setInterval(()=>{ 
+  interval = setInterval(()=>{
     http.get('http://localhost:5000/api/userDetails/usersList', response =>{
       let data = "";
       response.on('data', chunk=>{
@@ -46,7 +47,7 @@ io.on('connection',(socket) => {
 },500);
 });
 
-// initial server listen on port 
+// initial server listen on port
 const port = process.env.port || 5000 ;
 
 server.listen(port,()=> console.log('Server started on port ' + port));
@@ -63,8 +64,8 @@ app.use((req, res, next)=>{
   next();
 });
 
-// path to routes 
+// path to routes
 app.use("/api/user",userRoutes);
 app.use("/api/userDetails",userDetailsRoutes);
-
+app.use("/api/product_routes",productRoutes);
 
