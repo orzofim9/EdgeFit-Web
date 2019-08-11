@@ -1,7 +1,6 @@
 <div class="userList">
-
         <mat-card class="searchBox">
-                <form #searchForm="ngForm">
+                <form (change)="onSearch(searchForm)" (submit)="onSearch(searchForm)" #searchForm="ngForm">
                     <mat-form-field>
                         <input matInput type="text" name="firstName" ngModel placeholder="First name" #fisrtNameInput="ngModel">
                     </mat-form-field>

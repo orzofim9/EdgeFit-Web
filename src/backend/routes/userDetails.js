@@ -47,18 +47,13 @@ router.post('/updateDetails/:email',function(req,res){
 });
 
 // get all users from db
-router.get('/usersList', function(req, res) {
-   /* UserDetails.find({}, function(err, users) {
-        var userMap = [];
-        let userName;
-        users.forEach(function(user) {
-            userName = user.firstName + " " + user.lastName;
-            userMap.push(userName);
-        });
-      
-        res.status(200).json(userMap);  
-    });*/
-    UserDetails.find((err,users)=>{
+router.post('/usersList', function(req, res) {
+    let query = {}
+    req.body.firstName? query.firstName=req.body.firstName:null;
+    req.body.lastName? query.lastName=req.body.lastName:null;
+    req.body.city? query.city=req.body.city:null;
+
+    UserDetails.find(query,(err,users)=>{
         res.status(200).json(users);
     });
 });

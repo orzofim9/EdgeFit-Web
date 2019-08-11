@@ -2,6 +2,7 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import * as io from 'socket.io-client';
+import { NgForm } from '@angular/forms';
 @Injectable({
   providedIn: "root"
 })
@@ -13,6 +14,7 @@ import * as io from 'socket.io-client';
 export class UsersListComponent implements OnInit {
   socket:SocketIOClient.Socket;
   usersList;
+  filters;
   displayedColumns: string[] = ['First Name', 'Last Name','Email','City','Address','Phone'];
   constructor(private http: HttpClient, private router: Router){
     this.socket = io.connect('http://localhost:5000');
@@ -30,14 +32,24 @@ export class UsersListComponent implements OnInit {
    * parse response into array of jsons and set into this.usersList property
    */
   getUsersList(){
-    this.http.get("http://localhost:5000/api/userDetails/usersList").subscribe(response=>{
-    var list = Object.values(Object.entries(Object.values(response)));
-    var uList = [];
-    for(let i=0;i<list.length;i++){
-      
-      uList.push(list[i][1]);
+    this.http.post("http://localhost:5000/api/userDetails/usersList",this.filters).subscribe(response=>{
+      var list = Object.values(Object.entries(Object.values(response)));
+      var uList = [];
+      for(let i=0;i<list.length;i++){
+        
+        uList.push(list[i][1]);
+      }
+      this.usersList = uList;
+    });
+  }
+
+  onSearch(form: NgForm){
+    const searchFilters = {
+      firstName: form.value.firstName,
+      lastName: form.value.lastName,
+      city: form.value.city
     }
-    this.usersList = uList;
-  });
+    this.filters = searchFilters;
+    console.log(this.filters);
   }
 }
