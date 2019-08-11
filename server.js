@@ -2,13 +2,17 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+
 // path to the user.js routes
 const userRoutes = require('./src/backend/routes/user');
+const userDetailsRoutes = require('./src/backend/routes/userDetails');
+
 const app = express();
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
-const userScheme = require('./src/backend/models/user');
 const http = require('http');
+const server = http.Server(app);
+const io = require('socket.io')(server);
+
+//connection to db
 mongoose.connect("mongodb+srv://Sagi:dmRSJFPfkxnioIXX@cluster0-56ueu.mongodb.net/edgefit?w=majority").then(()=>{
   console.log("Connected to db");
 })
@@ -16,17 +20,20 @@ mongoose.connect("mongodb+srv://Sagi:dmRSJFPfkxnioIXX@cluster0-56ueu.mongodb.net
   console.log('Connection to db failed');
 });
 
+// initial client side index page
 app.use(express.static(path.join(__dirname, 'dist/firstApp')));
 
 app.use(bodyParser.json());
 
 let interval;
 
+// websocket socket connection
 io.on('connection',(socket) => {
   console.log("new connection made");
   let userMap = [];
+  // emit to client each 0.5 second the users list from db
   interval = setInterval(()=>{ 
-    http.get('http://localhost:5000/api/user/usersList', response =>{
+    http.get('http://localhost:5000/api/userDetails/usersList', response =>{
       let data = "";
       response.on('data', chunk=>{
         data += chunk;
@@ -39,6 +46,7 @@ io.on('connection',(socket) => {
 },500);
 });
 
+// initial server listen on port 
 const port = process.env.port || 5000 ;
 
 server.listen(port,()=> console.log('Server started on port ' + port));
@@ -55,6 +63,8 @@ app.use((req, res, next)=>{
   next();
 });
 
+// path to routes 
 app.use("/api/user",userRoutes);
+app.use("/api/userDetails",userDetailsRoutes);
 
 

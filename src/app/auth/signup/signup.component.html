@@ -8,7 +8,16 @@
                 <input matInput type="password" name="password" ngModel placeholder="Password" #passwordInput="ngModel">
                 <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
             </mat-form-field>
+            <mat-form-field>
+                    <input matInput type="text" name="firstName" ngModel placeholder="First name" #fisrtNameInput="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+                    <input matInput type="text" name="lastName" ngModel placeholder="Last name" #lastNameInput="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+                    <input matInput type="date" name="birthday" ngModel placeholder="Birthday" #birthdayInput="ngModel">
+            </mat-form-field>
             <button color="primary" mat-raised-button type="submit" *ngIf="!isLoading">Sign Up</button>
         </form>
-    </mat-card>
+</mat-card>
           

@@ -56,16 +56,12 @@ router.post("/login", (req, res, next)=>{
     })
 });
 
-router.get('/usersList', function(req, res) {
-    User.find({}, function(err, users) {
-      var userMap = [];
-  
-      users.forEach(function(user) {
-        userMap.push(user.email);
-      });
-  
-      res.status(200).json(userMap);  
+router.get('/deleteUser/:email',(req,res)=>{
+    User.deleteOne({email: req.params.email},(err,response)=>{
+        res.status(201).json({
+            msg: 'user deleted!',
+            response: response
+        });
     });
-});
-
+})
 module.exports = router;

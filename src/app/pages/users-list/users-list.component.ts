@@ -25,7 +25,7 @@ export class UsersListComponent implements OnInit {
   }
 
   getUsersList(){
-    this.http.get("http://localhost:5000/api/user/usersList").subscribe(response=>{
+    this.http.get("http://localhost:5000/api/userDetails/usersList").subscribe(response=>{
       this.usersList = response;
     });
   }

@@ -19,7 +19,6 @@ export class AuthService {
         const authData: AuthData = { email: email, password: password };
         this.http.post("http://localhost:5000/api/user/signup",authData).subscribe(response => {
             console.log(response);
-            this.router.navigate(['/']);
         });
     }
 
@@ -36,7 +35,7 @@ export class AuthService {
                 this.authStatusListener.next(true);
                 const now = new Date();
                 const expirationDate = new Date(now.getTime()+expiresInDuration*1000);
-                this.saveAuthData(token,expirationDate);
+                this.saveAuthData(email,token,expirationDate);
                 this.router.navigate(['/']);
             }
          });
@@ -54,8 +53,7 @@ export class AuthService {
         this.authStatusListener.next(false);
         clearTimeout(this.tokenTimer);
         this.clearAuthData();
-        this.router.navigate(['/']);
-
+        //this.router.navigate(['/']);
     }
 
     autoAuthUser(){
@@ -73,11 +71,13 @@ export class AuthService {
         }
     }
 
-    private saveAuthData(token: string, expirationDate: Date){
+    private saveAuthData(email: string, token: string, expirationDate: Date){
+        localStorage.setItem('email',email);
         localStorage.setItem('token',token);
         localStorage.setItem('expiration',expirationDate.toISOString());
     }
     private clearAuthData(){
+        localStorage.removeItem("email");
         localStorage.removeItem("token");
         localStorage.removeItem("expiration");
     }

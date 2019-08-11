@@ -1,0 +1,17 @@
+<mat-card>
+    <form (submit)="onUpdate(updateForm)" #updateForm="ngForm"> 
+        <mat-form-field>
+            <input matInput type="text" name="firstName" ngModel placeholder="First Name" value=this.userDetails.firstName #fisrtNameInput="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" name="lastName" ngModel placeholder="Last Name" value=this.userDetails.lastName #fisrtNameInput="ngModel">
+        </mat-form-field>
+        <div style="padding: 5px">
+            <button color="primary" mat-raised-button type="submit">Update</button>
+        </div> 
+    </form>
+    <div>
+        <button color="warn" mat-raised-button (click)="onDelete()">Delete User</button>
+    </div>
+</mat-card>
+          

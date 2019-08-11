@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations' ;
-import { MatInputModule, MatToolbarModule, MatButtonModule,MatExpansionModule,MatMenuModule } from '@angular/material';
+import { MatInputModule, MatToolbarModule, MatButtonModule,MatExpansionModule,MatMenuModule, MatSelectModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -18,6 +18,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { UsersListComponent } from './pages/users-list/users-list.component';
+import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UsersListComponent } from './pages/users-list/users-list.component';
     AboutComponent,
     LoginComponent,
     SignupComponent,
-    UsersListComponent
+    UsersListComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,7 @@ import { UsersListComponent } from './pages/users-list/users-list.component';
     MatToolbarModule,
     MatExpansionModule,
     MatMenuModule,
+    MatSelectModule,
     HttpClientModule,
     //Google maps api key
     AgmCoreModule.forRoot({
