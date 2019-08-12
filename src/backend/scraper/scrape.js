@@ -59,7 +59,7 @@ function product_request_category(url,product_category){
         product_price = product_data($,false, '#ModelPrice', '.price-label', i);
         product_image_link = "https://www.allsportstore.com" + product_data($,true, '#ModelImageCell', 'img', i);
         product_price = string_to_int(product_price);
-
+        product_brand = product_brand.substring(0, product_brand.length-1);
         if (product_title != "") {
          /* console.log("product name: " + product_title );
           console.log("product price: " + product_price +"  ");
