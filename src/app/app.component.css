@@ -1,15 +1,17 @@
 main {
   margin: 5% auto;
-  width: 50%;
+  width: 80%;
 
-  background-color: rgba(238, 240, 245, 0.733);
+ /* background-color: rgba(238, 240, 245, 0.733);
   border-radius: 5%;
-
+*/
 }
 
 body{
-  background-image: url('./media/barbell-building-challenge.jpg');
+  /*background-image: url('./media/barbell-building-challenge.jpg');*/
   background-size: cover;
-  background-repeat: no-repeat
+  background-repeat: no-repeat;
+  background-color: white;
+
 
 }

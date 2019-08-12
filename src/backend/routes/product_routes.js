@@ -12,14 +12,7 @@ router.get('/products/:category',(req,res)=>{
 
 router.get('/products', function(req, res) {
   Product.find({}, function(err, products) {
-      var productMap = [];
-      let product_title;
-      products.forEach(function(product) {
-        product_title = product.title;
-          productMap.push(product_title);
-      });
-
-      res.status(200).json(productMap);
+      res.status(200).json(products);
   });
 });
 

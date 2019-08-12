@@ -1,4 +1,36 @@
-.userList{
-  Margin: auto;
-  Padding: 10px;
+
+.mat-grid-list{
+  width: 900px;
+  height: 2000px;
+  margin: auto;
+  padding: 10px;
+
+}
+
+.mat-grid-tile{
+  background-color:white;
+  width: 10px;
+  border: 15px;
+
+}
+.mat-figure{
+  width: 50px;
+  height: 150px;
+  border: 18px;
+}
+
+.image{
+  margin-bottom: 60px;
+  margin-left: 65px;
+}
+
+.divider-in-product{
+  margin-bottom: 10px;
+  border-top-width: 1px;
+}
+
+
+.divider-out-product{
+
+  border-top-width: 3px;
 }

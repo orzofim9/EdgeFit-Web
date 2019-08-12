@@ -54,11 +54,11 @@ function product_request_category(url,product_category){
       var i = 1;
 
       while (flag){
+        product_brand = product_data($,false, '#ModelLinkCell', 'span', i);
         product_title = product_data($,false, '#ModelLinkCell', 'a', i);
         product_price = product_data($,false, '#ModelPrice', '.price-label', i);
         product_image_link = "https://www.allsportstore.com" + product_data($,true, '#ModelImageCell', 'img', i);
-
-
+        product_price = string_to_int(product_price);
 
         if (product_title != "") {
          /* console.log("product name: " + product_title );
@@ -69,6 +69,7 @@ function product_request_category(url,product_category){
             const product = new Product({
               number: product_number,
               category: product_category,
+              brand: product_brand,
               title: product_title,
               price: product_price,
               image_link: product_image_link
@@ -76,14 +77,11 @@ function product_request_category(url,product_category){
 
              });
             product.save().then(result => {
-              console.log("product saved!")
-/*              res.status(201).json({
-                message: 'Product created!',
-                result: result
-              });*/
+              //console.log("product saved!")
+
             });
 
-     // });
+
           console.log(product)
           i++;
           product_number ++;
@@ -107,4 +105,13 @@ function product_data($,image, classid, text, i){
   }
   return products_data;
 
+}
+
+function string_to_int(product_price){
+  for(let i=0; i<product_price.length; i++){
+    if(product_price[i] >= String.fromCharCode(48) && product_price[i] <= String.fromCharCode(57)){
+      var x = product_price.substring(i, product_price.length);
+     return x
+    }
+  }
 }

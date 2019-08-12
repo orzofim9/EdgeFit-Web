@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations' ;
-import { MatInputModule, MatToolbarModule, MatButtonModule,MatExpansionModule,MatMenuModule, MatSelectModule, MatTableModule } from '@angular/material';
-import { MatCardModule } from '@angular/material/card';
+import { MatInputModule,MatCardModule,MatListModule,MatDividerModule, MatToolbarModule, MatButtonModule,MatExpansionModule,MatMenuModule, MatSelectModule, MatTableModule,MatGridListModule } from '@angular/material';
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -49,6 +49,9 @@ import { ProductsListComponent } from './pages/products-list/products-list.compo
     MatSelectModule,
     MatTableModule,
     HttpClientModule,
+    MatGridListModule,
+    MatListModule,
+    MatDividerModule,
     //Google maps api key
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB_QKXBX8kCEWW7k5toiRA4PWTElJNw-48'
