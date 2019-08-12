@@ -48,6 +48,7 @@ export class ProductsListComponent implements OnInit {
       price: form.value.price
     }
     this.filters = searchFilters;
+    this.getProductsList();
     console.log(this.filters);
   }
 }
