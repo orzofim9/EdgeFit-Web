@@ -14,19 +14,19 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./products-list.component.css']
 })
 export class ProductsListComponent implements OnInit {
-  //socket:SocketIOClient.Socket;
+  socket:SocketIOClient.Socket;
   productsList;
   filters;
   constructor(private http: HttpClient, private router: Router)
   {
-    //this.socket = io.connect('http://localhost:5000');
+    this.socket = io.connect('http://localhost:5000');
   }
 
   ngOnInit() {
     this.getProductsList();
-    /*this.socket.on("getProducts", productMap => {
+    this.socket.on("getProducts", productMap => {
       this.getProductsList();
-    });*/
+    });
   }
 
   getProductsList(){
@@ -48,7 +48,6 @@ export class ProductsListComponent implements OnInit {
       price: form.value.price
     }
     this.filters = searchFilters;
-    this.getProductsList();
     console.log(this.filters);
   }
 }

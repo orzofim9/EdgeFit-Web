@@ -32,6 +32,7 @@ let interval;
 io.on('connection',(socket) => {
   console.log("new connection made");
   let userMap = [];
+  let productsMap =[];
   // emit to client each 0.5 second the users list from db
   interval = setInterval(()=>{
     http.get('http://localhost:5000/api/userDetails/usersList', response =>{
@@ -43,8 +44,19 @@ io.on('connection',(socket) => {
         userMap = data;
         socket.emit('getUsers',userMap);
       })
-  });
-},500);
+    });
+
+    http.get('http://localhost:5000/api/product_routes/products', response =>{
+      let data = "";
+      response.on('data', chunk=>{
+        data += chunk;
+      })
+      response.on('end',()=>{
+        productsMap = data;
+        socket.emit('getProducts',userMap);
+      })
+    });
+  },500);
 });
 
 // initial server listen on port
