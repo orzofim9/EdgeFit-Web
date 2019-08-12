@@ -1,11 +1,26 @@
-<mat-grid-list  cols="3" rowHeight="1:1">
+<mat-card class="searchBox">
+    <form (change)="onSearch(searchForm)" (submit)="onSearch(searchForm)" #searchForm="ngForm">
+        <mat-form-field>
+            <input matInput type="text" name="category" ngModel placeholder="Category" #categoryInput="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" name="brand" ngModel placeholder="Brand" #brandInput="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" name="price" ngModel placeholder="Price" #priceInput="ngModel">
+        </mat-form-field>
+        <button color="primary" mat-raised-button type="submit">Search</button>
+    </form>
+</mat-card>
+<mat-grid-list   cols="3" rowHeight="1:1" >
     <mat-grid-tile *ngFor="let product of productsList">
 
-      <mat-list role="list">
+      <mat-list role="list" >
       <mat-list-item class="image" role="listitem" > <img src= {{product.image_link}} width=150px height= 150px></mat-list-item>
       <mat-divider class="divider-in-product"></mat-divider>
       <mat-list-item class="title" role="listitem"> <h3>{{product.title}}</h3></mat-list-item>
-      <mat-list-item class="price" role="listitem"><h4>price:   ${{ product.price }}</h4></mat-list-item>
+      <mat-list-item class="price" role="listitem"><h4>price:   ${{ productsList.price }}</h4></mat-list-item>
+
       <mat-divider class="divider-out-product" [vertical]="true"></mat-divider>
       <mat-divider class="divider-out-product"></mat-divider>
 
