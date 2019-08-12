@@ -1,5 +1,5 @@
 <mat-card class="searchBox">
-    <form (change)="onSearch(searchForm)" (submit)="onSearch(searchForm)" #searchForm="ngForm">
+    <form style="text-align:center" (change)="onSearch(searchForm)" (submit)="onSearch(searchForm)" #searchForm="ngForm">
         <mat-form-field>
             <input matInput type="text" name="category" ngModel placeholder="Category" #categoryInput="ngModel">
         </mat-form-field>
