@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
     private isAuthenticated = false;
+    private isAdminRole = false;
+    private isAdminListener = new Subject<boolean>();
     private token: string;
     private tokenTimer: NodeJS.Timer;
     private authStatusListener = new Subject<boolean>();
@@ -32,6 +34,8 @@ export class AuthService {
                 const expiresInDuration = response.expiresIn;
                 this.setAuthTimer(expiresInDuration);
                 this.isAuthenticated = true;
+                this.isAdminRole = this.isAdmin(email);
+                this.isAdminListener.next(true);
                 this.authStatusListener.next(true);
                 const now = new Date();
                 const expirationDate = new Date(now.getTime()+expiresInDuration*1000);
@@ -50,6 +54,7 @@ export class AuthService {
     logout(){
         this.token = null;
         this.isAuthenticated = false;
+        this.isAdminListener.next(false);
         this.authStatusListener.next(false);
         clearTimeout(this.tokenTimer);
         this.clearAuthData();
@@ -68,6 +73,13 @@ export class AuthService {
             this.isAuthenticated = true;
             this.setAuthTimer(expiresIn / 1000);
             this.authStatusListener.next(true);
+            this.isAdminRole = this.isAdmin(localStorage.getItem('email'));
+            if(this.isAdminRole){
+                this.isAdminListener.next(true);
+            }
+            else{
+                this.isAdminListener.next(false);
+            }
         }
     }
 
@@ -103,5 +115,26 @@ export class AuthService {
 
     getIsAuth(){
         return this.isAuthenticated;
+    }
+
+    getIsAdminListener(){
+        return this.isAdminListener.asObservable();
+    }
+    getIsAdminRole(){
+        return this.isAdminRole;
+    }
+
+    isAdmin(email: string){
+        if(!email){
+            return false;
+        }
+        this.http.get("http://localhost:5000/api/userDetails/getUserRole/" + email).subscribe(response =>{
+            let role = JSON.stringify(response);
+            if(role == "admin"){
+                console.log("success");
+                return true;
+            }
+            return false;
+        });
     }
 }
