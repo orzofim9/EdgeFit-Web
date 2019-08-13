@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import * as io from 'socket.io-client';
 import { NgForm } from '@angular/forms';
+var ahoCorasick = require('aho-corasick-search')
+
+var acSearch = new ahoCorasick();
 
 @Injectable({
   providedIn: "root"
@@ -17,13 +20,14 @@ export class ProductsListComponent implements OnInit {
   socket:SocketIOClient.Socket;
   productsList;
   filters;
+
   constructor(private http: HttpClient, private router: Router)
   {
     this.socket = io.connect('http://localhost:5000');
   }
 
   ngOnInit() {
-    this.getProductsList();
+     this.getProductsList();
     this.socket.on("getProducts", productMap => {
       this.getProductsList();
     });
@@ -36,15 +40,18 @@ export class ProductsListComponent implements OnInit {
       for(let i=0;i<list.length;i++){
 
         pList.push(list[i][1]);
+        acSearch.add(list[i][1].brand);
       }
+
       this.productsList  = pList;
     });
   }
 
   onSearch(form: NgForm){
+    acSearch.build();
     const searchFilters = {
       category: form.value.category,
-      brand: form.value.brand,
+      brand: acSearch.search( form.value.brand,),
       price: form.value.price
     }
     this.filters = searchFilters;

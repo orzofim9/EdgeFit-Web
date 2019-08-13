@@ -3,36 +3,7 @@ const request = require('request');
 const Product = require("../models/product");
 const mongoose = require("mongoose");
 
-
-
-/*const conn = mongoose.createConnection("mongodb+srv://Sagi:dmRSJFPfkxnioIXX@cluster0-56ueu.mongodb.net/edgefit?w=majority",{ useNewUrlParser: true });
-conn.on('open', function () {
-
-    conn.db.listCollections({name: 'products'}).next(function (err, collectionName) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-
-      if(collectionName){
-        console.log('DVDVSDCSFVDVSDVDAVSVADVAD');
-        console.log(collectionNames);
-          conn.close();
-        }
-    });
-});
-mongoose.db.listCollections({name: 'products'})//move this lines to the file that calls this file
-    .next(function(err, collinfo) {
-        if (collinfo) {
-          mongoose.connection.db.dropCollection('porducts', function(err, result) {});
-          console.log("drop collection")
-
-        }
-        else{console.log("there is no collection")}
-
-    });
-*/
-console.log("hello")
+//console.log("hello2")
 var product_number = 1;
 //sports shoes
 product_request_category('https://www.allsportstore.com/en/Football-Boots/c-63.aspx?AttributeValueIDs=1462','Sports shoes')
@@ -45,7 +16,10 @@ product_request_category('https://www.allsportstore.com/en/Running-Accessories/c
 // food additives
 product_request_category('https://www.allsportstore.com/en/Supliments-and-Energy-Drinks/c-351.aspx',  'Food additives')
 // balls
-product_request_category('https://www.allsportstore.com/en/Balls/c-447.aspx',  'Balls')
+product_request_category('https://www.allsportstore.com/en/Balls/c-447.aspx',  'Balls',acSearch)
+
+
+
 function product_request_category(url,product_category){
   request(url, (error,response, html)=>{
     if(!error && response.statusCode == 200){
@@ -59,13 +33,9 @@ function product_request_category(url,product_category){
         product_price = product_data($,false, '#ModelPrice', '.price-label', i);
         product_image_link = "https://www.allsportstore.com" + product_data($,true, '#ModelImageCell', 'img', i);
         product_price = string_to_int(product_price);
-
+        product_brand = product_brand.substring(0, product_brand.length-1);
         if (product_title != "") {
-         /* console.log("product name: " + product_title );
-          console.log("product price: " + product_price +"  ");
-          console.log("product image link: " + product_image_link +"  ");*/
 
-         // router.post("/add_product", (req, res, next)=>{
             const product = new Product({
               number: product_number,
               category: product_category,
@@ -78,7 +48,6 @@ function product_request_category(url,product_category){
              });
             product.save().then(result => {
               //console.log("product saved!")
-
             });
 
 
@@ -89,6 +58,8 @@ function product_request_category(url,product_category){
         }
         else {flag = false}
       }
+
+
     }
 
   });

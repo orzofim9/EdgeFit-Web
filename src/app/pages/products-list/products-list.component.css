@@ -6,6 +6,16 @@
   padding: 10px;
 
 }
+.searchBox{
+  width: 700px;
+  height: 40px;
+  background-color: rgba(231, 234, 240, 0.336);
+  margin: auto;
+  margin-bottom: 30px;
+}
+.mat-form-field{
+  margin-right: 20px
+}
 
 .mat-grid-tile{
   background-color:white;
