@@ -19,7 +19,8 @@
       <mat-list-item class="image" role="listitem" > <img src= {{product.image_link}} width=150px height= 150px></mat-list-item>
       <mat-divider class="divider-in-product"></mat-divider>
       <mat-list-item class="title" role="listitem"> <h3>{{product.title}}</h3></mat-list-item>
-      <mat-list-item class="price" role="listitem"><h4>price:   ${{ product.price }}   </h4> <button class="btn" color="primary" mat-raised-button (click)="addToCart(product)">Add to cart</button></mat-list-item>
+      <mat-list-item class="price" role="listitem"><h4>price:   ${{ product.price }}   </h4> <button class="btn" color="primary" 
+        mat-raised-button (click)="addToCart(product)">Add to cart</button></mat-list-item>
       <mat-divider class="divider-out-product" [vertical]="true"></mat-divider>
       <mat-divider class="divider-out-product"></mat-divider>
 

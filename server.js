@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const axios = require('axios');
 
 // path to the user.js routes
 const userRoutes = require('./src/backend/routes/user');
@@ -54,10 +55,25 @@ io.on('connection',(socket) => {
       })
       response.on('end',()=>{
         productsMap = data;
-        socket.emit('getProducts',userMap);
+        socket.emit('getProducts',productsMap);
       })
     });
   },500);
+
+  socket.on('productAddToCart', productToCart =>{
+    axios.post('http://localhost:5000/api/cart/addcart/' + productToCart.email, { product: productToCart.product }).then(response => {
+      http.get('http://localhost:5000/api/cart/getCartProducts/' + productToCart.email, response => {
+        let data = "";
+        response.on('data', chunk=>{
+          data += chunk;
+        })
+        response.on('end',()=>{
+          productsMap = data;
+          io.emit('getCart',productsMap);
+        });
+      });
+    });
+  });
 });
 
 // initial server listen on port
@@ -82,4 +98,3 @@ app.use("/api/user",userRoutes);
 app.use("/api/userDetails",userDetailsRoutes);
 app.use("/api/product_routes",productRoutes);
 app.use("/api/cart",cartRoutes);
-

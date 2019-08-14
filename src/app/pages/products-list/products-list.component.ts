@@ -20,7 +20,7 @@ export class ProductsListComponent implements OnInit {
   socket:SocketIOClient.Socket;
   productsList;
   filters;
-  productToCart;
+  //productToCart;
 
   constructor(private http: HttpClient, private router: Router)
   {
@@ -28,7 +28,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.getProductsList();
+    this.getProductsList();
     this.socket.on("getProducts", productMap => {
       this.getProductsList();
     });
@@ -71,14 +71,16 @@ export class ProductsListComponent implements OnInit {
   }
 
   addToCart(product){
-    this.productToCart = {
+    const productToCart = {
+      email: localStorage.getItem('email'),
       product: product._id
     }
     if(localStorage.getItem('email')){
-      console.log(this.productToCart);
-      this.http.post("http://localhost:5000/api/cart/addcart/" + localStorage.getItem('email'),this.productToCart).subscribe(response => {
+      console.log(productToCart);
+      this.socket.emit('productAddToCart',productToCart);
+      /*this.http.post("http://localhost:5000/api/cart/addcart/" + localStorage.getItem('email'),this.productToCart).subscribe(response => {
         console.log(response);
-      });
+      });*/
     }
     else{
       this.router.navigate(['/login']);

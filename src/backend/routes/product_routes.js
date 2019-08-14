@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/product");
+const mongoose = require('mongoose');
 var util = require('util');
+
 router.get('/products/:category',(req,res)=>{
 
   console.log(req.params.category);
@@ -12,12 +14,22 @@ router.get('/products/:category',(req,res)=>{
   });
 });
 
-router.get('/productsId/:id',function(req,res){
+router.post('/productsId',function(req,res){
   console.log("here4345");
-  Product.find({"_id": req.params.id},(err, response)=>{
+  const ids = JSON.parse(req.body.idList);
+  console.log(ids);   
+  let idList = []
+  ids.map(id => {
+    idList.push(mongoose.Types.ObjectId(id));
+  })
+  Product.find({'_id': { $in: idList }},(err,response)=>{
+    console.log(response);
+    res.status(201).json(response);
+  });
+  /*Product.find({"_id": req.params.id},(err, response)=>{
     console.log("here: " +response);
     res.status(200).json( response);
-  });
+  });*/
 });
 
 

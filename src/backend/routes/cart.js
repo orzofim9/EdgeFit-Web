@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Cart = require("../models/cart");
 
-// add user details to db on user sign up
 router.post("/addcart/:email", (req, res, next)=>{
   console.log(req.params.email);
         Cart.find({email: req.params.email},(err,cart)=>{
