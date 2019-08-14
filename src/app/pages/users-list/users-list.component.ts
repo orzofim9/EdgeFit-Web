@@ -3,6 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import * as io from 'socket.io-client';
 import { NgForm } from '@angular/forms';
+import { CustomPipe } from 'src/app/custom.pipe';
+
+
+
 @Injectable({
   providedIn: "root"
 })
@@ -21,7 +25,7 @@ export class UsersListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getUsersList(); 
+    this.getUsersList();
     this.socket.on("getUsers",userMap => {
       this.getUsersList();
     })
@@ -36,7 +40,7 @@ export class UsersListComponent implements OnInit {
       var list = Object.values(Object.entries(Object.values(response)));
       var uList = [];
       for(let i=0;i<list.length;i++){
-        
+
         uList.push(list[i][1]);
       }
       this.usersList = uList;

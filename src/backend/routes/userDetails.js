@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const UserDetails = require("../models/userDetails");
+var createCountMinSketch = require("count-min-sketch")
 
+var sketch = createCountMinSketch()
+
+const set_city = new Set()
 // add user details to db on user sign up
 router.post("/signup", (req, res, next)=>{
         const userDetails = new UserDetails({
@@ -29,6 +33,7 @@ router.post("/signup", (req, res, next)=>{
 
 // get user details given email
 router.get('/getUserDetails/:email',function(req,res,next){
+  console.log("here");
     UserDetails.find({email: req.params.email},function(err, user){
         res.status(200).json(user);
 
@@ -37,12 +42,12 @@ router.get('/getUserDetails/:email',function(req,res,next){
 
 // update userdetails given email
 router.post('/updateDetails/:email',function(req,res){
-    UserDetails.updateOne({ email: req.params.email },{ firstName: req.body.firstName, lastName: req.body.lastName, 
+    UserDetails.updateOne({ email: req.params.email },{ firstName: req.body.firstName, lastName: req.body.lastName,
      city: req.body.city, address: req.body.address, phone: req.body.phone }, function(err,response){
         res.status(201).json({
-         msg: "user updated!",   
+         msg: "user updated!",
          response: response
-        })
+        });
     });
 });
 
@@ -55,8 +60,28 @@ router.post('/usersList', function(req, res) {
 
     UserDetails.find(query,(err,users)=>{
         res.status(200).json(users);
+        for(var i = 0 ; i<users.length;i++){
+          set_city.add(users[i].city);
+         sketch.update(users[i].city,1);
+        }
     });
 });
+
+router.get('/getCitySegmentation',(req,res)=>{
+  UserDetails.find({},(err,users)=>{
+      for(var i = 0 ; i<users.length;i++){
+        set_city.add(users[i].city);
+       sketch.update(users[i].city,1);
+      }
+      response=[];
+      for(let city of set_city){
+        response.push(city +" : "+ sketch.query(city));
+      }
+
+      res.status(200).json(response)
+  });
+});
+
 
 
 // Delete user given email

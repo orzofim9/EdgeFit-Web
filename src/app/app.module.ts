@@ -20,6 +20,8 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { UsersListComponent } from './pages/users-list/users-list.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
+import { MyCartComponent } from './pages/my-cart/my-cart.component';
+import { CustomPipe } from './custom.pipe';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { ProductsListComponent } from './pages/products-list/products-list.compo
     SignupComponent,
     UsersListComponent,
     MyProfileComponent,
-    ProductsListComponent
+    ProductsListComponent,
+    MyCartComponent,
+    CustomPipe
   ],
   imports: [
     BrowserModule,

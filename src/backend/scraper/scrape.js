@@ -2,7 +2,9 @@ const cheerio = require('cheerio');
 const request = require('request');
 const Product = require("../models/product");
 const mongoose = require("mongoose");
+var createCountMinSketch = require("count-min-sketch")
 
+var sketch = createCountMinSketch()
 //console.log("hello2")
 var product_number = 1;
 //sports shoes
@@ -16,7 +18,7 @@ product_request_category('https://www.allsportstore.com/en/Running-Accessories/c
 // food additives
 product_request_category('https://www.allsportstore.com/en/Supliments-and-Energy-Drinks/c-351.aspx',  'Food additives')
 // balls
-product_request_category('https://www.allsportstore.com/en/Balls/c-447.aspx',  'Balls',acSearch)
+product_request_category('https://www.allsportstore.com/en/Balls/c-447.aspx',  'Balls')
 
 
 
@@ -49,8 +51,8 @@ function product_request_category(url,product_category){
             product.save().then(result => {
               //console.log("product saved!")
             });
-
-
+          sketch.update(product_brand, 1);
+          console.log("sketch is : " + sketch.query("Adidas"));
           console.log(product)
           i++;
           product_number ++;
@@ -86,3 +88,4 @@ function string_to_int(product_price){
     }
   }
 }
+

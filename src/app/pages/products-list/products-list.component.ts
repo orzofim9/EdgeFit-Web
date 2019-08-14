@@ -20,6 +20,7 @@ export class ProductsListComponent implements OnInit {
   socket:SocketIOClient.Socket;
   productsList;
   filters;
+  productToCart;
 
   constructor(private http: HttpClient, private router: Router)
   {
@@ -49,13 +50,40 @@ export class ProductsListComponent implements OnInit {
 
   onSearch(form: NgForm){
     acSearch.build();
-    const searchFilters = {
+
+    if(acSearch.search( form.value.brand).length>0){
+    var searchFilters = {
       category: form.value.category,
-      brand: acSearch.search( form.value.brand,),
+      brand: acSearch.search( form.value.brand),
       price: form.value.price
+    }
+  }
+    else{
+      var searchFilters={
+        category: form.value.category,
+        brand:  form.value.brand,
+        price: form.value.price
+      };
+
     }
     this.filters = searchFilters;
     console.log(this.filters);
+  }
+
+  addToCart(product){
+    this.productToCart = {
+      product: product._id
+    }
+    if(localStorage.getItem('email')){
+      console.log(this.productToCart);
+      this.http.post("http://localhost:5000/api/cart/addcart/" + localStorage.getItem('email'),this.productToCart).subscribe(response => {
+        console.log(response);
+      });
+    }
+    else{
+      this.router.navigate(['/login']);
+    }
+
   }
 }
 

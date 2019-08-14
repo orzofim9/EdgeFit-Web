@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const userRoutes = require('./src/backend/routes/user');
 const userDetailsRoutes = require('./src/backend/routes/userDetails');
 const productRoutes = require('./src/backend/routes/product_routes');
+const cartRoutes = require('./src/backend/routes/cart');
 //const scrape = require('./src/backend/scraper/scrape');
 const app = express();
 const http = require('http');
@@ -80,4 +81,5 @@ app.use((req, res, next)=>{
 app.use("/api/user",userRoutes);
 app.use("/api/userDetails",userDetailsRoutes);
 app.use("/api/product_routes",productRoutes);
+app.use("/api/cart",cartRoutes);
 
