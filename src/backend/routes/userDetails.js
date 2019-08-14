@@ -10,6 +10,7 @@ const set_city = new Set()
 router.post("/signup", (req, res, next)=>{
         const userDetails = new UserDetails({
             email: req.body.email,
+            role: "guest",
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             lastName: req.body.lastName,
@@ -94,4 +95,18 @@ router.get('/deleteUser/:email',(req,res)=>{
     });
 });
 
+router.get('/getUserRole/:email',(req,res)=>{
+    UserDetails.find({email: req.params.email},function(err, user){
+        res.status(200).json(user[0].role);
+    });
+});
+
+router.post('/editUserRole/:email',(req,res)=>{
+    UserDetails.updateOne({ email: req.params.email },{ role: req.body.role }, function(err,response){
+           res.status(201).json({
+            msg: "user's role updated!",   
+            response: response
+           })
+       });
+})
 module.exports = router;

@@ -3,10 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import * as io from 'socket.io-client';
 import { NgForm } from '@angular/forms';
-import { CustomPipe } from 'src/app/custom.pipe';
-
-
-
+import { AuthService } from 'src/app/auth/auth.service';
 @Injectable({
   providedIn: "root"
 })
@@ -19,8 +16,8 @@ export class UsersListComponent implements OnInit {
   socket:SocketIOClient.Socket;
   usersList;
   filters;
-  displayedColumns: string[] = ['First Name', 'Last Name','Email','City','Address','Phone'];
-  constructor(private http: HttpClient, private router: Router){
+  displayedColumns: string[] = ['First Name', 'Last Name','Email','City','Address','Phone','Role','Options'];
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService){
     this.socket = io.connect('http://localhost:5000');
   }
 
@@ -28,7 +25,7 @@ export class UsersListComponent implements OnInit {
     this.getUsersList();
     this.socket.on("getUsers",userMap => {
       this.getUsersList();
-    })
+    });
   }
 
   /**

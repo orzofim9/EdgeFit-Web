@@ -19,7 +19,7 @@
 
       <button routerLink="/contact" class="btn" mat-button>Contact</button>
       <button routerLink="/about" class="btn" mat-button>About</button>
-      <button routerLink="/users" class="btn" mat-button>Users List</button>
+      <button *ngIf="isAdmin" routerLink="/users" class="btn" mat-button>Users List</button>
 
     </div>
     <span class="userSection">
