@@ -29,6 +29,7 @@
       </div>
       <div>
         <button *ngIf="userIsAuthenticated" routerLink="/myprofile" class="btn" mat-button>My Profile</button>
+        <button *ngIf="userIsAuthenticated" routerLink="/mycart" class="btn" mat-button>Cart</button>
         <button *ngIf="userIsAuthenticated" (click)="onLogout()" class="btn" mat-button>Log Out</button>
       </div>
     </span>

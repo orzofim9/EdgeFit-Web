@@ -37,17 +37,6 @@ io.on('connection',(socket) => {
   let productsMap =[];
   // emit to client each 0.5 second the users list from db
   interval = setInterval(()=>{
-    http.get('http://localhost:5000/api/userDetails/usersList', response =>{
-      let data = "";
-      response.on('data', chunk=>{
-        data += chunk;
-      })
-      response.on('end',()=>{
-        userMap = data;
-        socket.emit('getUsers',userMap);
-      })
-    });
-
     http.get('http://localhost:5000/api/product_routes/products', response =>{
       let data = "";
       response.on('data', chunk=>{
@@ -59,6 +48,21 @@ io.on('connection',(socket) => {
       })
     });
   },500);
+
+  socket.on('signUp', userDetails=>{
+    axios.post("http://localhost:5000/api/userDetails/signup", userDetails).then(response=>{
+      console.log("user details sent!!!!!");
+      io.emit('getUsers',response.data);
+    });
+  });
+
+  socket.on('deleteUser',email=>{
+    axios.get("http://localhost:5000/api/user/deleteUser/" + email).then(response=>{
+      axios.get("http://localhost:5000/api/userDetails/deleteUser/" + email).then(response=>{
+        io.emit('getUsers',response.data);
+      })
+    })
+  })
 
   socket.on('productAddToCart', productToCart =>{
     axios.post('http://localhost:5000/api/cart/addcart/' + productToCart.email, { product: productToCart.product }).then(response => {

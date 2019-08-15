@@ -53,4 +53,9 @@ export class UsersListComponent implements OnInit {
     this.filters = searchFilters;
     console.log(this.filters);
   }
+
+  onDelete(email){
+    console.log("delete " + email);
+    this.socket.emit('deleteUser', email);
+  }
 }

@@ -5,7 +5,8 @@ var createCountMinSketch = require("count-min-sketch")
 
 var sketch = createCountMinSketch()
 
-const set_city = new Set()
+const set_city = new Set();
+
 // add user details to db on user sign up
 router.post("/signup", (req, res, next)=>{
         const userDetails = new UserDetails({
@@ -13,13 +14,13 @@ router.post("/signup", (req, res, next)=>{
             role: "guest",
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            lastName: req.body.lastName,
             birthday: req.body.birthday,
             city: req.body.city,
             address: req.body.address,
             phone: req.body.phone
         });
         userDetails.save().then(result => {
+            console.log(result);
             res.status(201).json({
                 message: 'User details added!',
                 result: result
@@ -29,6 +30,7 @@ router.post("/signup", (req, res, next)=>{
             res.status(500).json({
                 error: err
             });
+            console.log(err);
         });
 });
 

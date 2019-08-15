@@ -37,6 +37,7 @@ export class MyCartComponent implements OnInit {
       return;
     }
     this.http.get("http://localhost:5000/api/cart/getCartProducts/" + this.email).subscribe(response => {
+     if(Object.values(response).length>0){
       this.cart_products = (Object.entries(response)[0][1]).products;
       const idList = this.cart_products;
       console.log(idList);
@@ -45,6 +46,7 @@ export class MyCartComponent implements OnInit {
           this.productsList=response;
           console.log(this.productsList);
         });
+      }
     });
   }
 }

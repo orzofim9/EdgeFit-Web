@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import * as io from 'socket.io-client';
 
 @Component({
   selector: 'app-signup',
@@ -10,9 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent{
+  socket:SocketIOClient.Socket;
   isLoading = false;
   userDetails;
-  constructor(public authService: AuthService, private http: HttpClient, private router: Router) { }
+  constructor(public authService: AuthService, private http: HttpClient, private router: Router) { 
+    this.socket = io.connect('http://localhost:5000');
+  }
 
   onSignup(form: NgForm){
     if(form.invalid){
@@ -30,9 +34,11 @@ export class SignupComponent{
       phone: form.value.phone
     }
     console.log(this.userDetails);
-    this.http.post("http://localhost:5000/api/userDetails/signup",this.userDetails).subscribe(response => {
+    this.socket.emit('signUp',this.userDetails);
+
+    /*this.http.post("http://localhost:5000/api/userDetails/signup",this.userDetails).subscribe(response => {
       console.log(response);
       this.router.navigate(['/']);
-    });
+    });*/
   }
 }
