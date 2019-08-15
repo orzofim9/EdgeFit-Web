@@ -1,3 +1,9 @@
 <div class="content">
-    <p>Hi I'm Omer</p>
+    <h4>Hi I'm Omer</h4>
+    <h4>We have users from all of these cities :</h4>
+    <p *ngFor='let user_city of users_cities'>
+      {{ user_city[1][1] | custom:"users"}} {{ user_city[1][0] | custom:"city"}}
+    </p>
+    <svg></svg>
+    <script> src="https://d3js.org/d3.v4.min.js"</script>
 </div>

@@ -3,7 +3,7 @@ const router = express.Router();
 const UserDetails = require("../models/userDetails");
 var createCountMinSketch = require("count-min-sketch")
 
-var sketch = createCountMinSketch()
+
 
 const set_city = new Set();
 
@@ -71,6 +71,7 @@ router.post('/usersList', function(req, res) {
 });
 
 router.get('/getCitySegmentation',(req,res)=>{
+  var sketch = createCountMinSketch()
   UserDetails.find({},(err,users)=>{
       for(var i = 0 ; i<users.length;i++){
         set_city.add(users[i].city);
@@ -78,7 +79,7 @@ router.get('/getCitySegmentation',(req,res)=>{
       }
       response=[];
       for(let city of set_city){
-        response.push(city +" : "+ sketch.query(city));
+        response.push([city , sketch.query(city)]);
       }
 
       res.status(200).json(response)
@@ -106,7 +107,7 @@ router.get('/getUserRole/:email',(req,res)=>{
 router.post('/editUserRole/:email',(req,res)=>{
     UserDetails.updateOne({ email: req.params.email },{ role: req.body.role }, function(err,response){
            res.status(201).json({
-            msg: "user's role updated!",   
+            msg: "user's role updated!",
             response: response
            })
        });
