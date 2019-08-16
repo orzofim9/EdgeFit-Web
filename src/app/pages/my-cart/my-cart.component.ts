@@ -18,6 +18,7 @@ export class MyCartComponent implements OnInit {
   email;
   cart_products;
   productsList;
+  total = 0;
   displayedColumns: string[] =['Products', 'Price', 'Delete']
   constructor(private http: HttpClient, private router: Router) { 
     this.socket = io.connect('http://localhost:5000');
@@ -44,6 +45,11 @@ export class MyCartComponent implements OnInit {
       var pList=[]
         this.http.post("http://localhost:5000/api/product_routes/productsId" ,{idList: JSON.stringify(idList)}).subscribe(response => {
           this.productsList=response;
+          for(let item of this.productsList){
+            console.log(item.price)
+            this.total += parseFloat(item.price)  ;
+            console.log("total is : " + this.total)
+          }
           console.log(this.productsList);
         });
       }
