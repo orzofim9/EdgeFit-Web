@@ -41,5 +41,33 @@ router.get('/getCartProducts/:email',function(req,res,next){
     });
 });
 
+router.post('/deleteProduct/:email',function(req,res,next){
+  Cart.find({email: req.params.email},function(err,cart){
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
+    console.log(cart[0]);
+    let products = [];
+    cart[0].products.map(product=>{
+      if(product!=req.body.product){
+        products.push(product);
+      }
+    });
+    Cart.updateOne({ email: req.params.email }, { products: products }, function(err,response){
+      res.status(201).json({
+        msg: 'product deleted',
+        response: response
+      });
+    });
+  });
+});
+
+router.get('/clearCart/:email',function(req,res,next){
+  Cart.deleteOne({email: req.params.email},function(err,response){
+    res.status(200).json({
+      msg: 'All products deleted',
+      response: response
+    });
+  });
+});
+
 module.exports = router;
 

@@ -36,9 +36,5 @@ export class SignupComponent{
     console.log(this.userDetails);
     this.socket.emit('signUp',this.userDetails);
 
-    /*this.http.post("http://localhost:5000/api/userDetails/signup",this.userDetails).subscribe(response => {
-      console.log(response);
-      this.router.navigate(['/']);
-    });*/
   }
 }

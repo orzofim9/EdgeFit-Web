@@ -18,7 +18,7 @@ export class MyCartComponent implements OnInit {
   email;
   cart_products;
   productsList;
-  displayedColumns: string[] =['Products', 'Price']
+  displayedColumns: string[] =['Products', 'Price', 'Delete']
   constructor(private http: HttpClient, private router: Router) { 
     this.socket = io.connect('http://localhost:5000');
    }
@@ -47,6 +47,17 @@ export class MyCartComponent implements OnInit {
           console.log(this.productsList);
         });
       }
+      this.productsList=[];
     });
+  }
+
+  onDelete(product){
+    console.log(product);
+    this.socket.emit('deleteProduct',{ email: localStorage.getItem('email'), product: product });
+  }
+
+  onClear(){
+    console.log("clear");
+    this.socket.emit('clearCart',{ email: localStorage.getItem('email') });
   }
 }

@@ -78,6 +78,7 @@ export class ProductsListComponent implements OnInit {
     if(localStorage.getItem('email')){
       console.log(productToCart);
       this.socket.emit('productAddToCart',productToCart);
+      alert("Product added!");
     }
     else{
       this.router.navigate(['/login']);
