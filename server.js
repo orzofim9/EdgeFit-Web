@@ -51,7 +51,6 @@ io.on('connection',(socket) => {
 
   socket.on('signUp', userDetails=>{
     axios.post("http://localhost:5000/api/userDetails/signup", userDetails).then(response=>{
-      console.log("user details sent!!!!!");
       io.emit('getUsers',response.data);
     });
   });
@@ -80,7 +79,6 @@ io.on('connection',(socket) => {
   });
 
   socket.on('deleteProduct', productToDelete =>{
-    console.log(productToDelete);
     axios.post('http://localhost:5000/api/cart/deleteProduct/'+ productToDelete.email, { product: productToDelete.product}).then(response =>{
         io.emit('getCart');
     });
@@ -88,7 +86,6 @@ io.on('connection',(socket) => {
 
   socket.on('clearCart', userCart=>{
     axios.get('http://localhost:5000/api/cart/clearCart/' + userCart.email).then(response => {
-      console.log("deletetetetete");
       io.emit('getCart');
     })
   })

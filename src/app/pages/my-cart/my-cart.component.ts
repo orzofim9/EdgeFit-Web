@@ -45,6 +45,7 @@ export class MyCartComponent implements OnInit {
       var pList=[]
         this.http.post("http://localhost:5000/api/product_routes/productsId" ,{idList: JSON.stringify(idList)}).subscribe(response => {
           this.productsList=response;
+          this.total=0;
           for(let item of this.productsList){
             console.log(item.price)
             this.total += parseFloat(item.price)  ;
@@ -53,7 +54,11 @@ export class MyCartComponent implements OnInit {
           console.log(this.productsList);
         });
       }
-      this.productsList=[];
+      else{
+        this.productsList=[];
+        this.total=0;
+      }
+      
     });
   }
 
