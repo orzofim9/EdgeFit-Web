@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const UserDetails = require("../models/userDetails");
 var createCountMinSketch = require("count-min-sketch")
-
+var sketch = createCountMinSketch();
 
 
 const set_city = new Set();
@@ -71,7 +71,7 @@ router.post('/usersList', function(req, res) {
 });
 
 router.get('/getCitySegmentation',(req,res)=>{
-  var sketch = createCountMinSketch()
+  
   UserDetails.find({},(err,users)=>{
       for(var i = 0 ; i<users.length;i++){
         set_city.add(users[i].city);
