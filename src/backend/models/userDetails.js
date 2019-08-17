@@ -9,7 +9,9 @@ const userDetailsSchema = mongoose.Schema({
     birthday: {type: Date },
     city: { type: String },
     address: { type: String },
-    phone: { type: String }
+    phone: { type: String },
+    lat: { type: Number },
+    lng: { type: Number },
 });
 
 //Check if email registered alreay exists

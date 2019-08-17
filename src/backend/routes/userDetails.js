@@ -9,6 +9,8 @@ const set_city = new Set();
 
 // add user details to db on user sign up
 router.post("/signup", (req, res, next)=>{
+        lat = Math.random() + 32;
+        lng = Math.random() + 34;
         const userDetails = new UserDetails({
             email: req.body.email,
             role: "guest",
@@ -17,7 +19,9 @@ router.post("/signup", (req, res, next)=>{
             birthday: req.body.birthday,
             city: req.body.city,
             address: req.body.address,
-            phone: req.body.phone
+            phone: req.body.phone,
+            lat: Math.random() * (32.308129-32.133508) + 32.133508,
+            lng: Math.random() * (34.960570-34.847565) + 34.847565
         });
         userDetails.save().then(result => {
             console.log(result);

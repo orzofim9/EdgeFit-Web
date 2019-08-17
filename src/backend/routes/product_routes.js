@@ -15,9 +15,7 @@ router.get('/products/:category',(req,res)=>{
 });
 
 router.post('/productsId',function(req,res){
-  console.log("here4345");
-  const ids = JSON.parse(req.body.idList);
-  console.log(ids);   
+  const ids = JSON.parse(req.body.idList);   
   let idList = []
   ids.map(id => {
     idList.push(mongoose.Types.ObjectId(id));
@@ -26,10 +24,6 @@ router.post('/productsId',function(req,res){
     console.log(response);
     res.status(201).json(response);
   });
-  /*Product.find({"_id": req.params.id},(err, response)=>{
-    console.log("here: " +response);
-    res.status(200).json( response);
-  });*/
 });
 
 
