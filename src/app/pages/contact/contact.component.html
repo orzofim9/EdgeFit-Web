@@ -4,8 +4,8 @@
     <p>Email: omereldadi@gmail.com</p>
 
     <div class="content">
-        <agm-map [zoom]="15" [latitude]="lat" [longitude]="lng">
-            {{ this.coordinats }}
+        <agm-map [zoom]="10" [latitude]="lat" [longitude]="lng">
+            <agm-marker  *ngFor="let coord of coordinats" [latitude]="coord.lat" [longitude]="coord.lng"></agm-marker>
         </agm-map>
     </div>
 </div>

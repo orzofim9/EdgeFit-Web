@@ -31,6 +31,8 @@ export class ContactComponent implements OnInit {
       for(let coord of this.coordinats){
         this.markers += '<agm-marker [latitude]="' + coord.lat + '" [longitude]="' + coord.lng + '"></agm-marker>';
       }
+
+      console.log(this.markers);
     });
   }
 
