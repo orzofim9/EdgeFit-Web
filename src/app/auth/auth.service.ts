@@ -26,7 +26,7 @@ export class AuthService {
 
     login(email: string, password: string){
         const authData: AuthData = { email: email, password: password };
-        this.http.post<{token: string, expiresIn: number}>("http://localhost:5000/api/user/login", authData).subscribe(response =>{ 
+        this.http.post<{token: string, expiresIn: number}>("http://localhost:5000/api/user/login", authData).subscribe(async response =>{ 
             const token = response.token;
             this.token = token;
             console.log(response);
@@ -34,15 +34,24 @@ export class AuthService {
                 const expiresInDuration = response.expiresIn;
                 this.setAuthTimer(expiresInDuration);
                 this.isAuthenticated = true;
-                this.isAdminRole = this.isAdmin(email);
-                this.isAdminListener.next(true);
-                this.authStatusListener.next(true);
-                const now = new Date();
-                const expirationDate = new Date(now.getTime()+expiresInDuration*1000);
-                this.saveAuthData(email,token,expirationDate);
-                this.router.navigate(['/']);
+                this.http.get("http://localhost:5000/api/userDetails/getUserRole/" + email).subscribe(response =>{   
+                    if(response == 'admin'){
+                        this.isAdminRole = true;
+                    }
+                    if(this.isAdminRole){
+                        this.isAdminListener.next(true);
+                    }
+                    else {
+                        this.isAdminListener.next(false);
+                    }
+                    this.authStatusListener.next(true);
+                    const now = new Date();
+                    const expirationDate = new Date(now.getTime()+expiresInDuration*1000);
+                    this.saveAuthData(email,token,expirationDate);
+                    this.router.navigate(['/']);
+                });
             }
-         });
+        });
     }
 
     private setAuthTimer(duration: number){
@@ -54,6 +63,7 @@ export class AuthService {
     logout(){
         this.token = null;
         this.isAuthenticated = false;
+        this.isAdminRole = false;
         this.isAdminListener.next(false);
         this.authStatusListener.next(false);
         clearTimeout(this.tokenTimer);
@@ -61,7 +71,7 @@ export class AuthService {
         //this.router.navigate(['/']);
     }
 
-    autoAuthUser(){
+    async autoAuthUser(){
         const authInformation = this.getAuthData();
         if(!authInformation){
             return;
@@ -73,13 +83,18 @@ export class AuthService {
             this.isAuthenticated = true;
             this.setAuthTimer(expiresIn / 1000);
             this.authStatusListener.next(true);
-            this.isAdminRole = this.isAdmin(localStorage.getItem('email'));
-            if(this.isAdminRole){
-                this.isAdminListener.next(true);
-            }
-            else{
-                this.isAdminListener.next(false);
-            }
+            const email = localStorage.getItem('email');
+            this.http.get("http://localhost:5000/api/userDetails/getUserRole/" + email).subscribe(response =>{   
+                if(response == 'admin'){
+                    this.isAdminRole = true;
+                }
+                if(this.isAdminRole){
+                    this.isAdminListener.next(true);
+                }
+                else{
+                    this.isAdminListener.next(false);
+                }
+            });
         }
     }
 
@@ -128,12 +143,15 @@ export class AuthService {
         if(!email){
             return false;
         }
-        this.http.get("http://localhost:5000/api/userDetails/getUserRole/" + email).subscribe(response =>{
-            let role = JSON.stringify(response);
-            if(role == "admin"){
+        
+         this.http.get("http://localhost:5000/api/userDetails/getUserRole/" + email).subscribe(response =>{
+            //let role = JSON.stringify(response);
+            console.log(response=="admin");
+            if(response == 'admin'){
                 console.log("success");
                 return true;
             }
+            console.log("failed");
             return false;
         });
     }

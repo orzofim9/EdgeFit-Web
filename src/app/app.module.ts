@@ -58,7 +58,7 @@ import { CustomPipe } from './custom.pipe';
     MatDividerModule,
     //Google maps api key
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB_QKXBX8kCEWW7k5toiRA4PWTElJNw-48'
+      apiKey: 'AIzaSyBBJ_0NlmurPE3RxJ4ePbjjHUjvLBeBeLA'
     })
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi: true}],

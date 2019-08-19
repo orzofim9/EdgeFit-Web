@@ -9,10 +9,10 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit,OnDestroy{
   userIsAuthenticated = false;
+  isAdmin = false;
   private authListenerSubs: Subscription;
   private roleListenerSubs: Subscription;
-  isAdmin = false;
-
+  
   constructor(private authService: AuthService){}
 
   ngOnInit(){
@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit,OnDestroy{
 
   ngOnDestroy(){  
     this.authListenerSubs.unsubscribe();
+    this.roleListenerSubs.unsubscribe();
   }
 
   onLogout(){
