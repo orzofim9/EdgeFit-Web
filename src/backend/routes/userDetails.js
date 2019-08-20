@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const UserDetails = require("../models/userDetails");
 var createCountMinSketch = require("count-min-sketch")
-var sketch = createCountMinSketch();
+
 
 
 const set_city = new Set();
@@ -60,22 +60,23 @@ router.post('/updateDetails/:email',function(req,res){
 
 // get all users from db
 router.post('/usersList', function(req, res) {
-    let query = {}
+
+  let query = {}
     req.body.firstName? query.firstName=req.body.firstName:null;
     req.body.lastName? query.lastName=req.body.lastName:null;
     req.body.city? query.city=req.body.city:null;
 
     UserDetails.find(query,(err,users)=>{
         res.status(200).json(users);
-        for(var i = 0 ; i<users.length;i++){
-          set_city.add(users[i].city);
-         sketch.update(users[i].city,1);
-        }
+       /* for(var i = 0 ; i<users.length;i++){
+          //set_city.add(users[i].city);
+        // sketch.update(users[i].city,1);
+        }*/
     });
 });
 
 router.get('/getCitySegmentation',(req,res)=>{
-  
+  var sketch = createCountMinSketch();
   UserDetails.find({},(err,users)=>{
       for(var i = 0 ; i<users.length;i++){
         set_city.add(users[i].city);

@@ -22,6 +22,7 @@ import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { MyCartComponent } from './pages/my-cart/my-cart.component';
 import { CustomPipe } from './custom.pipe';
+import { GraphDirective } from './graph.directive';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CustomPipe } from './custom.pipe';
     MyProfileComponent,
     ProductsListComponent,
     MyCartComponent,
-    CustomPipe
+    CustomPipe,
+    GraphDirective
   ],
   imports: [
     BrowserModule,

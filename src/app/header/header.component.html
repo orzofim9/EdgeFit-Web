@@ -6,16 +6,12 @@
       <button class="btn" mat-button  [matMenuTriggerFor]="myedge">My Edge</button>
       <mat-menu #myedge="matMenu"  >
           <button mat-menu-item class="dropBtn">Home</button>
-          <button routerLink="/mycart" mat-menu-item class="dropBtn">My Cart</button>
+          <button *ngIf="userIsAuthenticated" routerLink="/mycart" mat-menu-item class="dropBtn">My Cart</button>
           <button mat-menu-item class="dropBtn">Menu</button>
       </mat-menu>
 
-      <button routerLink="/products" class="btn" mat-button  [matMenuTriggerFor]="items">Products</button>
-      <mat-menu #items="matMenu">
-        <button mat-menu-item class="dropBtn" >Food Additives</button>
-        <button mat-menu-item class="dropBtn" >Equipment</button>
-        <button mat-menu-item class="dropBtn" >Sport Clothes</button>
-      </mat-menu>
+      <button routerLink="/products" class="btn" mat-button >Products</button>
+
 
       <button routerLink="/contact" class="btn" mat-button>Contact</button>
       <button routerLink="/about" class="btn" mat-button>About</button>
@@ -29,7 +25,7 @@
       </div>
       <div>
         <button *ngIf="userIsAuthenticated" routerLink="/myprofile" class="btn" mat-button>My Profile</button>
-        <button *ngIf="userIsAuthenticated" routerLink="/mycart" class="btn" mat-button>Cart</button>
+      <!--  <button *ngIf="userIsAuthenticated" routerLink="/mycart" class="btn" mat-button>Cart</button>-->
         <button *ngIf="userIsAuthenticated" (click)="onLogout()" class="btn" mat-button>Log Out</button>
       </div>
     </span>

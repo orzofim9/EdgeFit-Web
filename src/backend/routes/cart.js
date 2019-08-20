@@ -41,6 +41,14 @@ router.get('/getCartProducts/:email',function(req,res,next){
     });
 });
 
+router.get('/getAllProducts',function(req,res,next){
+  Cart.find({},function(err, carts){
+    //console.log(cart)
+    res.status(200).json(carts);
+
+  });
+});
+
 router.post('/deleteProduct/:email',function(req,res,next){
   Cart.find({email: req.params.email},function(err,cart){
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!")

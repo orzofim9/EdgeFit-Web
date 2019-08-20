@@ -4,6 +4,10 @@
     <p *ngFor='let user_city of users_cities'>
       {{ user_city[1][1] | custom:"users"}} {{ user_city[1][0] | custom:"city"}}
     </p>
-    <svg></svg>
+    <h4>We have {{numOfCat}} categories in our store :</h4>
+    <p *ngFor='let cat of categoryNumAndName'>
+      {{cat[0]}} products are {{cat[1]}}.
+    </p>
+    <svg appGraph [dataKeys]= dataKeys  [dataValues]= dataValues></svg>
     <script> src="https://d3js.org/d3.v4.min.js"</script>
 </div>
