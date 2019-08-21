@@ -1,0 +1,21 @@
+<mat-card>
+    <form (submit)="onUpdate()" #postForm="ngForm">
+        <mat-form-field>
+          <input matInput type="text" name='title' [(ngModel)]="titleText" required #title="ngModel">
+          <mat-error *ngIf="title.invalid">Please enter a title</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput id="textForPosts"  name='content' rows="6" [(ngModel)]="contentText" required #content="ngModel"></textarea>
+            <mat-error *ngIf="content.invalid">Please enter the content</mat-error>
+        </mat-form-field>
+        <button color="primary" mat-raised-button type="submit">Update</button>
+    </form>
+</mat-card>
+      
+      
+      
+      
+      
+      
+      
+      

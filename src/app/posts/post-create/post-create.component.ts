@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Output} from '@angular/core';
 import { NgForm } from "@angular/forms";
+import * as uuid from 'uuid';
+import * as io from 'socket.io-client';
+import { Router } from '@angular/router';
 
-import { Post } from '../post-list/post.model';
 
 @Component({
   selector: 'app-post-create',
@@ -9,19 +11,24 @@ import { Post } from '../post-list/post.model';
   styleUrls: [ './post-create.component.css' ]
 })
 export class PostCreateComponent {
+  socket:SocketIOClient.Socket;
   enteredValue =  '';
   enteredContent =  '';
-  @Output() post_created = new EventEmitter<Post>();
+  constructor(private router:Router){
+    this.socket = io.connect('http://localhost:5000');
+  }
 
   onAddedPost(form: NgForm) {
     if(form.invalid) {
       return;
     }
-    const post: Post = {
+    const post = {
+      id: uuid.v4(),
       title: form.value.title,
       content: form.value.content
     }
-    this.post_created.emit(post);
+    this.socket.emit('addPost',post);
+    this.router.navigate(['/']);
   }
 }
 

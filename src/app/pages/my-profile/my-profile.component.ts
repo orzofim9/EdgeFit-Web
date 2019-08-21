@@ -12,6 +12,12 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class MyProfileComponent implements OnInit {
   email;
   userDetails;
+  firstName="";
+  lastName="";
+  city="";
+  address="";
+  phone="";
+
   constructor(private http: HttpClient, private router: Router, public authService: AuthService) { }
 
   ngOnInit() {
@@ -23,18 +29,24 @@ export class MyProfileComponent implements OnInit {
     this.http.get("http://localhost:5000/api/userDetails/getUserDetails/" + this.email).subscribe(response => {
       this.userDetails = Object.entries(response)[0][1];
       console.log(this.userDetails);
+      this.firstName = this.userDetails.firstName;
+      this.lastName = this.userDetails.lastName;
+      this.address = this.userDetails.address;
+      this.city = this.userDetails.city;
+      this.phone = this.userDetails.phone;
     });
   }
 
   onUpdate(form: NgForm){
-    this.userDetails.firstName = form.value.firstName;
-    this.userDetails.lastName = form.value.lastName;
-    this.userDetails.city = form.value.city;
-    this.userDetails.address = form.value.address;
-    this.userDetails.phone = form.value.phone;
-
+    const userDetails = {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      city: this.city,
+      address: this.address,
+      phone: this.phone
+    }
     console.log(this.userDetails);
-    this.http.post("http://localhost:5000/api/userDetails/updateDetails/" + this.email,this.userDetails).subscribe(response => {
+    this.http.post("http://localhost:5000/api/userDetails/updateDetails/" + this.email, userDetails).subscribe(response => {
       console.log(response);
       alert('Details updated!');
     })

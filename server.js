@@ -9,6 +9,7 @@ const userRoutes = require('./src/backend/routes/user');
 const userDetailsRoutes = require('./src/backend/routes/userDetails');
 const productRoutes = require('./src/backend/routes/product_routes');
 const cartRoutes = require('./src/backend/routes/cart');
+const postRoutes = require('./src/backend/routes/post');
 //const scrape = require('./src/backend/scraper/scrape');
 const app = express();
 const http = require('http');
@@ -89,7 +90,29 @@ io.on('connection',(socket) => {
       io.emit('getCart');
     })
   })
+
+  socket.on('addPost', post=>{
+    axios.post('http://localhost:5000/api/post/addPost', post).then(response =>{
+      io.emit('getPosts');
+    });
+  });
+
+  socket.on('deletePost',post => {
+    console.log(post);
+    axios.post('http://localhost:5000/api/post/deletePost', post).then(response => {
+      io.emit('getPosts');
+    })
+  })
+
+  socket.on('updatePost', post => {
+    axios.post('http://localhost:5000/api/post/updatePost',post).then(response => {
+      io.emit('getPost');
+    })
+  })
+
 });
+
+
 // initial server listen on port
 const port = process.env.port || 5000 ;
 
@@ -112,3 +135,4 @@ app.use("/api/user",userRoutes);
 app.use("/api/userDetails",userDetailsRoutes);
 app.use("/api/product_routes",productRoutes);
 app.use("/api/cart",cartRoutes);
+app.use("/api/post",postRoutes);

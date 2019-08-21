@@ -35,6 +35,6 @@ export class SignupComponent{
     }
     console.log(this.userDetails);
     this.socket.emit('signUp',this.userDetails);
-
+    this.router.navigate(['/']);
   }
 }
