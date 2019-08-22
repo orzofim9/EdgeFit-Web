@@ -51,6 +51,7 @@ export class UsersListComponent implements OnInit {
       city: form.value.city
     }
     this.filters = searchFilters;
+    this.socket.emit('searchUsers');
     console.log(this.filters);
   }
 

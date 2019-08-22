@@ -32,7 +32,7 @@ export class GraphDirective {
     var text = svg.selectAll("text").data(this.dataKeys).enter()
     .append("text").text(function(d){
 
-      d = d + " : " + dataValues[i].toFixed(2);
+      d = d + " : $" + dataValues[i].toFixed(2);
       i++;
         console.log("d is : " + d)
       return d;

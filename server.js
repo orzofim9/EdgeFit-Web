@@ -29,26 +29,11 @@ app.use(express.static(path.join(__dirname, 'dist/firstApp')));
 
 app.use(bodyParser.json());
 
-let interval;
 
 // websocket socket connection
 io.on('connection',(socket) => {
-  console.log("new connection made");
-  let userMap = [];
+//  console.log("new connection made");
   let productsMap =[];
-  // emit to client each 0.5 second the users list from db
-  interval = setInterval(()=>{
-    http.get('http://localhost:5000/api/product_routes/products', response =>{
-      let data = "";
-      response.on('data', chunk=>{
-        data += chunk;
-      })
-      response.on('end',()=>{
-        productsMap = data;
-        socket.emit('getProducts',productsMap);
-      })
-    });
-  },500);
 
   socket.on('signUp', userDetails=>{
     axios.post("http://localhost:5000/api/userDetails/signup", userDetails).then(response=>{
@@ -56,10 +41,20 @@ io.on('connection',(socket) => {
     });
   });
 
+  socket.on('searchUsers', ()=>{
+    io.emit('getUsers');
+  });
+
+  socket.on('searchProducts', ()=>{
+    io.emit('getProducts');
+  });
+
   socket.on('deleteUser',email=>{
     axios.get("http://localhost:5000/api/user/deleteUser/" + email).then(response=>{
       axios.get("http://localhost:5000/api/userDetails/deleteUser/" + email).then(response=>{
-        io.emit('getUsers',response.data);
+        axios.get('http://localhost:5000/api/cart/clearCart/' + email).then(response => {
+          io.emit('getUsers',response.data);
+        })
       })
     })
   })
@@ -115,8 +110,7 @@ io.on('connection',(socket) => {
     axios.post('http://localhost:5000/api/post/updatePost',post).then(response => {
       io.emit('getPosts');
     })
-  })
-
+  });
 });
 
 

@@ -23,8 +23,8 @@ import { UsersListComponent } from './pages/users-list/users-list.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { MyCartComponent } from './pages/my-cart/my-cart.component';
-import { CustomPipe } from './custom.pipe';
-import { GraphDirective } from './graph.directive';
+import { CustomPipe } from './customPipe/custom.pipe';
+import { GraphDirective } from './customDirective/graph.directive';
 import { PostEditComponent } from './posts/post-edit/post-edit.component';
 import { HomeComponent } from './pages/home/home.component';
 

@@ -29,9 +29,9 @@ export class ProductsListComponent implements OnInit {
 
   ngOnInit() {
     this.getProductsList();
-    this.socket.on("getProducts", productMap => {
+    this.socket.on('getProducts',()=>{
       this.getProductsList();
-    });
+    })
   }
 
   getProductsList(){
@@ -67,7 +67,7 @@ export class ProductsListComponent implements OnInit {
 
     }
     this.filters = searchFilters;
-    console.log(this.filters);
+    this.socket.emit('searchProducts');
   }
 
   addToCart(product){

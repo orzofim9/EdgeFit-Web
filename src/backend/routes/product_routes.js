@@ -57,7 +57,6 @@ router.post('/products', function(req, res) {
 */
 
 router.get('/countCategory',function(req,res){
-  console.log("sfsv")
   Product.aggregate([
     {
         $group: {

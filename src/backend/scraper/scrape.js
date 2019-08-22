@@ -2,9 +2,7 @@ const cheerio = require('cheerio');
 const request = require('request');
 const Product = require("../models/product");
 const mongoose = require("mongoose");
-var createCountMinSketch = require("count-min-sketch")
 
-var sketch = createCountMinSketch()
 //console.log("hello2")
 var product_number = 1;
 //sports shoes
@@ -51,12 +49,8 @@ function product_request_category(url,product_category){
             product.save().then(result => {
               //console.log("product saved!")
             });
-          sketch.update(product_brand, 1);
-          console.log("sketch is : " + sketch.query("Adidas"));
-          console.log(product)
           i++;
           product_number ++;
-          console.log("----------------------------------------------------------------------------" )
         }
         else {flag = false}
       }
