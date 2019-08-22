@@ -19,7 +19,7 @@ export class GraphDirective {
     var svgHeight = 400;
    var barPadding = 80;
    var barWidth = (svgWidth / this.dataValues.length );
-   var svg =  d3.select('svg' ).attr("width" , svgWidth).attr("height" , svgHeight).attr("fill", "blue")
+   var svg =  d3.select('svg' ).attr("width" , svgWidth).attr("height" , svgHeight).attr("fill", "green")
 
   var barChart = svg.selectAll("rect").data(this.dataValues).enter().append("rect").attr("y", function(d) {
     return svgHeight - d }).attr( "height", function(d){
@@ -36,7 +36,7 @@ export class GraphDirective {
       i++;
         console.log("d is : " + d)
       return d;
-    }).attr("y", function(d, i){console.log("d.v is: " + dataValues[i]); return svgHeight - dataValues[i]-5 }).attr("x",function(d,i){return barWidth * i})
+    }).attr("y", function(d, i){ return svgHeight - dataValues[i]-5 }).attr("x",function(d,i){return barWidth * i}).style("font-size", "10px").style("font-weight", "bold").style("fill", "#001a00")
   }
 
 }
