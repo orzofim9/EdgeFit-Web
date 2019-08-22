@@ -25,6 +25,7 @@ import { ProductsListComponent } from './pages/products-list/products-list.compo
 import { MyCartComponent } from './pages/my-cart/my-cart.component';
 import { CustomPipe } from './custom.pipe';
 import { GraphDirective } from './graph.directive';
+import { PostEditComponent } from './posts/post-edit/post-edit.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { GraphDirective } from './graph.directive';
     ProductsListComponent,
     MyCartComponent,
     CustomPipe,
-    GraphDirective
+    GraphDirective,
+    PostEditComponent
   ],
   imports: [
     BrowserModule,

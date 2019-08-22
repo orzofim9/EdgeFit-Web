@@ -68,10 +68,6 @@ router.post('/usersList', function(req, res) {
 
     UserDetails.find(query,(err,users)=>{
         res.status(200).json(users);
-       /* for(var i = 0 ; i<users.length;i++){
-          //set_city.add(users[i].city);
-        // sketch.update(users[i].city,1);
-        }*/
     });
 });
 

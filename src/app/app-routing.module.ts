@@ -9,10 +9,14 @@ import { UsersListComponent } from './pages/users-list/users-list.component';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { MyCartComponent } from './pages/my-cart/my-cart.component';
+import { PostListComponent } from './posts/post-list/post-list.component';
+import { PostEditComponent } from './posts/post-edit/post-edit.component';
 
 
 const routes: Routes = [
-    { path: '', component: PostCreateComponent },
+    { path: '', component: PostListComponent },
+    { path: 'editPost', component: PostEditComponent },
+    { path: 'createPost', component: PostCreateComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'about', component: AboutComponent },
     { path: 'login', component: LoginComponent },

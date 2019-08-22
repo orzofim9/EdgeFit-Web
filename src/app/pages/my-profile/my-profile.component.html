@@ -1,19 +1,19 @@
 <mat-card>
     <form (submit)="onUpdate(updateForm)" #updateForm="ngForm"> 
         <mat-form-field>
-            <input matInput type="text" name="firstName" ngModel placeholder="First Name" [(ngModel)]="this.userDetails.firstName" #fisrtNameInput="ngModel">
+            <input matInput type="text" name="firstName" ngModel placeholder="First Name" [(ngModel)]="firstName" #fisrtNameInput="ngModel">
         </mat-form-field>
         <mat-form-field>
-            <input matInput type="text" name="lastName" ngModel placeholder="Last Name" [(ngModel)]="this.userDetails.lastName" #fisrtNameInput="ngModel">
+            <input matInput type="text" name="lastName" ngModel placeholder="Last Name" [(ngModel)]="lastName" #fisrtNameInput="ngModel">
         </mat-form-field>
         <mat-form-field>
-            <input matInput type="text" name="city" ngModel placeholder="City" [(ngModel)]="this.userDetails.city" #fisrtNameInput="ngModel">
+            <input matInput type="text" name="city" ngModel placeholder="City" [(ngModel)]="city" #fisrtNameInput="ngModel">
         </mat-form-field>
         <mat-form-field>
-            <input matInput type="text" name="address" ngModel placeholder="Address" [(ngModel)]="this.userDetails.address" #fisrtNameInput="ngModel">
+            <input matInput type="text" name="address" ngModel placeholder="Address" [(ngModel)]="address" #fisrtNameInput="ngModel">
         </mat-form-field>
         <mat-form-field>
-            <input matInput type="text" name="phone" ngModel placeholder="Phone" [(ngModel)]="this.userDetails.phone" #fisrtNameInput="ngModel">
+            <input matInput type="text" name="phone" ngModel placeholder="Phone" [(ngModel)]="phone" #fisrtNameInput="ngModel">
         </mat-form-field>
         <div style="padding: 5px">
             <button color="primary" mat-raised-button type="submit">Update</button>
