@@ -3,11 +3,11 @@
   <span routerLink="/" id='NameWeb'></span>
   <div id=navBtns>
     <div style="display:inline-block;">
-      <button class="btn" mat-button  [matMenuTriggerFor]="myedge">My Edge</button>
-      <mat-menu #myedge="matMenu"  >
-          <button mat-menu-item class="dropBtn">Home</button>
-          <button *ngIf="userIsAuthenticated" routerLink="/mycart" mat-menu-item class="dropBtn">My Cart</button>
-          <button mat-menu-item class="dropBtn">Menu</button>
+      <button *ngIf="userIsAuthenticated" class="btn" mat-button  [matMenuTriggerFor]="myedge">My Edge</button>
+      <mat-menu #myedge="matMenu" >
+          <button routerLink="/" mat-menu-item class="dropBtn">Home</button>
+          <button routerLink="/postList" mat-menu-item class="dropBtn">Posts</button>
+          <button routerLink="/mycart" mat-menu-item class="dropBtn">My Cart</button>
       </mat-menu>
 
       <button routerLink="/products" class="btn" mat-button >Products</button>

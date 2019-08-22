@@ -24,6 +24,7 @@ import { MyCartComponent } from './pages/my-cart/my-cart.component';
 import { CustomPipe } from './custom.pipe';
 import { GraphDirective } from './graph.directive';
 import { PostEditComponent } from './posts/post-edit/post-edit.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { PostEditComponent } from './posts/post-edit/post-edit.component';
     MyCartComponent,
     CustomPipe,
     GraphDirective,
-    PostEditComponent
+    PostEditComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

@@ -23,7 +23,7 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit() {
     this.getUsersList();
-    this.socket.on("getUsers",userMap => {
+    this.socket.on("getUsers",() => {
       this.getUsersList();
     });
   }

@@ -11,10 +11,12 @@ import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { MyCartComponent } from './pages/my-cart/my-cart.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { PostEditComponent } from './posts/post-edit/post-edit.component';
+import { HomeComponent } from './pages/home/home.component';
 
 
 const routes: Routes = [
-    { path: '', component: PostListComponent },
+    { path: '', component: HomeComponent },
+    { path: 'postList', component: PostListComponent },
     { path: 'editPost', component: PostEditComponent },
     { path: 'createPost', component: PostCreateComponent },
     { path: 'contact', component: ContactComponent },

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import * as io from 'socket.io-client';
 
 @Component({
   selector: 'app-my-profile',
@@ -10,6 +11,7 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./my-profile.component.css']
 })
 export class MyProfileComponent implements OnInit {
+  socket:SocketIOClient.Socket;
   email;
   userDetails;
   firstName="";
@@ -18,12 +20,21 @@ export class MyProfileComponent implements OnInit {
   address="";
   phone="";
 
-  constructor(private http: HttpClient, private router: Router, public authService: AuthService) { }
+  constructor(private http: HttpClient, private router: Router, public authService: AuthService) { 
+    this.socket = io.connect('http://localhost:5000');
+  }
 
   ngOnInit() {
     this.email = localStorage.getItem('email');
+    this.getUserDetails();
+    this.socket.on('getUserDetails',()=>{
+      this.getUserDetails();
+    });
+  }
+
+  getUserDetails(){
     if(!this.email){
-      console.log("can't load user details");
+      alert("you need to log in");
       return;
     }
     this.http.get("http://localhost:5000/api/userDetails/getUserDetails/" + this.email).subscribe(response => {
@@ -39,6 +50,7 @@ export class MyProfileComponent implements OnInit {
 
   onUpdate(form: NgForm){
     const userDetails = {
+      email: this.email,
       firstName: this.firstName,
       lastName: this.lastName,
       city: this.city,
@@ -46,14 +58,15 @@ export class MyProfileComponent implements OnInit {
       phone: this.phone
     }
     console.log(this.userDetails);
-    this.http.post("http://localhost:5000/api/userDetails/updateDetails/" + this.email, userDetails).subscribe(response => {
+    this.socket.emit('updateUserDetails',userDetails);
+    /*this.http.post("http://localhost:5000/api/userDetails/updateDetails/" + this.email, userDetails).subscribe(response => {
       console.log(response);
       alert('Details updated!');
-    })
+    })*/
+    alert('Details updated!');
   }
 
   onDelete(){
-    
     this.http.get("http://localhost:5000/api/userDetails/deleteUser/" + this.email).subscribe(response => {
       this.http.get("http://localhost:5000/api/user/deleteUser/" + this.email).subscribe(response => {
         console.log(response);

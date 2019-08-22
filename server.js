@@ -64,6 +64,13 @@ io.on('connection',(socket) => {
     })
   })
 
+  socket.on('updateUserDetails',userDetails=>{
+    axios.post('http://localhost:5000/api/userDetails/updateDetails/' + userDetails.email, userDetails).then( response => {
+      io.emit('getUsers',response.data);
+      io.emit('getUserDetails');
+    })
+  })
+
   socket.on('productAddToCart', productToCart =>{
     axios.post('http://localhost:5000/api/cart/addcart/' + productToCart.email, { product: productToCart.product }).then(response => {
       http.get('http://localhost:5000/api/cart/getCartProducts/' + productToCart.email, response => {
@@ -106,7 +113,7 @@ io.on('connection',(socket) => {
 
   socket.on('updatePost', post => {
     axios.post('http://localhost:5000/api/post/updatePost',post).then(response => {
-      io.emit('getPost');
+      io.emit('getPosts');
     })
   })
 
