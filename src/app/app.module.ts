@@ -67,7 +67,7 @@ import { HomeComponent } from './pages/home/home.component';
     MatPaginatorModule,
     //Google maps api key
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBBJ_0NlmurPE3RxJ4ePbjjHUjvLBeBeLA'
+      apiKey: 'GOOGLEMAPSKEY'
     })
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi: true}],
