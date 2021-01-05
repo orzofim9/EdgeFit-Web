@@ -27,7 +27,7 @@
     "@angular/router": "~8.1.2",
     "@types/socket.io-client": "^1.4.32",
     "aho-corasick-search": "^1.0.0",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bcrypt": "^3.0.6",
     "cheerio": "^1.0.0-rc.3",
     "count-min-sketch": "^0.1.1",
